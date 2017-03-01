@@ -1,0 +1,12 @@
+1) lire le fichier (longueur: BUFF_SIZE) et les mets dans char *lect
+2) malloc char *tmp a ft_strlen(txt)
+3) copie dans tmp les valeurs de txt
+4) malloc char *txt a BUFF_SIZE + ft_strlen(tmp)
+5) copie dans txt les valeurs de lect sur BUFF_SIZE valeurs
+si une valeurs = '\0'
+alors on arrete de copier de lect, on effectue 6) et on sort
+fin si
+6) copie dans txt les valeurs de tmp sur ft_strlen(tmp) valeurs
+7) on recommance a 1) en bouclant
+
+
