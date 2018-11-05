@@ -1,0 +1,43 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: cjulliar <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2017/05/25 11:44:30 by cjulliar          #+#    #+#              #
+#    Updated: 2018/08/07 14:38:44 by cjulliar         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+SOURCE = main
+
+SOURCEDIR = $(addprefix src/,$(SOURCE:%=%.c))
+
+OBJETDIR = $(SOURCE:%=%.o)
+
+LIB = libft/libft.a
+
+WWW = -Wall -Werror -Wextra
+
+EXEC = computer
+
+MF = make fclean
+
+
+.PHONY: all clean fclean re
+
+all: $(EXEC)
+
+$(EXEC): $(OBJETDIR)
+	make -C libft/
+	gcc $(WWW) -o $(EXEC) -I $(LIB) $(SOURCEDIR) 
+clean:
+	make clean -C libft/
+	@/bin/rm -rf $(OBJETDIR)
+
+fclean: clean
+	/bin/rm -rf $(EXEC)
+
+re: fclean all
+
