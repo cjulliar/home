@@ -6,13 +6,13 @@
 #    By: cpalmier <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/18 15:03:03 by cpalmier          #+#    #+#              #
-#    Updated: 2018/11/05 12:12:27 by cjulliar         ###   ########.fr        #
+#    Updated: 2018/11/06 09:07:06 by cjulliar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = computer
 
-SRC = src/main.c
+SRC = src/main.c src/parseur.c
 
 HEADER = include/computer.h libft/libft.h
 
