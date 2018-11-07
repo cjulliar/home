@@ -17,12 +17,12 @@
 
 typedef struct	s_values
 {
-	double		a;
-	double		b;
-	double		c;
+	int		a;
+	int		b;
+	int		c;
 }				t_values;
 
 int				main(int ac, char **ag);
-int				parseur(char *str, t_values *v);
+int				parseur(char *str, t_values *v, t_values *r);
 
 #endif
