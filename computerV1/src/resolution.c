@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   resolution.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cjulliar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/11/09 11:42:11 by cjulliar          #+#    #+#             */
+/*   Updated: 2018/11/09 14:33:30 by cjulliar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/computer.h"
 #include <stdio.h>
 
@@ -37,30 +49,34 @@ void	ft_putdouble(double n)
 
 double	ft_sqrtdouble(double n)
 {
-	double r;
-	double x;
-
-	r = 0;
-	x = 1;
-	n *= 10000;
-	while (n > 0)
+	double x = 1;
+	double y = 0.5*(1+n);
+	while (ft_absdouble(y-x) > 0.0001)
 	{
-		if (x*x > n)
-		{
-			x = x - 1;
-			printf("%f (%f) - %f - %f - \n",x,x*x,n,r);
-			r = r + x;
-			n -= x*x;
-			x = 1;
-			printf("%f (%f) - %f - %f - \n\n",x,x*x,n,r);
-		}
-		else
-		{
-			x++;
-		}
+		x = y;
+		y = 0.5 * (x+n/x);
 	}
-	// r /= 1000;
+	return (y);
+}
+
+int		ft_puissance(int i, int p)
+{
+	int		r;
+
+	r = 1;
+	while (p > 0)
+	{
+		r *= i;
+		p--;
+	}
 	return (r);
+}
+
+int		ft_isinteger(double n, int v)
+{
+	if (((int)(n * 1000000) % (1000000 / (ft_puissance(10,v)))) > 0)
+		return (0);
+	return (1);
 }
 
 void	reduced_forme(double a, double b, double c)
@@ -81,16 +97,19 @@ void	reduced_forme(double a, double b, double c)
 	if (b != 0)
 	{
 		ft_putdouble(b);
+		ft_putchar('x');
+	}
+	if (c != 0)
+	{
 		if (c < 0)
 		{
-			ft_putstr("x - ");
+			ft_putstr(" - ");
 			c *= -1;
 		}
 		else
-			ft_putstr("x + ");
-	}
-	if (c != 0)
+			ft_putstr(" + ");
 		ft_putdouble(c);
+	}
 	if (a != 0 || b != 0 || c != 0)
 		ft_putendl(" = 0");
 }
@@ -122,7 +141,7 @@ void	degre1(double b, double c)
 	r = -c/b;
 	ft_putendl("Polynomial degree: 1");
 	ft_putendl("The solution is:");
-	if (((int)(r * 1000000) % 10000) != 0)
+	if (((int)(r * 1000000) % 10000) > 0)
 	{
 		ft_putdouble(-c);
 		ft_putchar('/');
@@ -133,26 +152,102 @@ void	degre1(double b, double c)
 	ft_putendl("");
 }
 
+
+void	degre2reeldev(double a, double b, double d, char s)
+{
+
+	printf("degre2reeldev\n");
+	if (b > 0)
+		ft_putstr("(-");
+	else
+		ft_putstr("(");
+	ft_putdouble(b);
+	ft_putstr(" ");
+	ft_putchar(s);
+	ft_putstr(" √");
+	ft_putdouble(d);
+	ft_putstr(") / ");
+	ft_putdouble(2*a);
+	ft_putendl("");
+	if (s == '+')
+		degre2reeldev(a, b, d, '-');
+}
+
+void	degre2reelnum(double a, double b, double d, char s)
+{
+	double r;
+	printf("degre2reelnum\n");
+	if (s == '+')
+		r = (-1 * b + ft_sqrtdouble(d)) / (2 * a);
+	else
+		r = (-1 * b - ft_sqrtdouble(d)) / (2 * a);
+		printf("r:%f\n",r);
+	if (ft_isinteger(r, 2) == 0)
+	{
+		if (s == '+')
+			ft_putdouble(-1 * b + ft_sqrtdouble(d));
+		else
+			ft_putdouble(-1 * b - ft_sqrtdouble(d));
+		ft_putstr(" / ");
+		ft_putdouble(2 * a);
+	}
+	else
+		ft_sqrtdouble(r);
+	ft_putendl("");
+	if (s == '+')
+		degre2reelnum(a, b, d, '-');
+}
+
 void	degre2(double a, double b, double c)
 {
 	double d;
-	// double r;
 
-	ft_putendl("Polynomial degree: 1");
+	ft_putendl("Polynomial degree: 2");
 	d = b*b - 4*a*c;
+	ft_putstr("delta = ");
+	ft_putdouble(d);
+	ft_putendl("");
+	
 	if (d > 0)
 	{
 		ft_putendl("Discriminant is strictly positive, the two solutions are:");
-		
-		
+		if (ft_isinteger(ft_sqrtdouble(d), 0) == 0)
+			degre2reeldev(a, b, d, '+');
+		else
+			degre2reelnum(a, b, d, '+');
+	}
+	else if (d == 0)
+	{
+		ft_putendl("Discriminant is null, the solution is:");
+		if (ft_isinteger((-1 * b) / (2 * a), 2) == 0)
+		{
+			if ((b < 0 && a > 0) || (b > 0 && a < 0))
+			{
+				ft_putdouble(b);
+				ft_putstr(" / ");
+				ft_putdouble(2 * a);
+			}
+			else
+			{
+				if (a < 0 && b < 0)
+				{
+					a *= -1;
+					b *= -1;
+				}
+				ft_putstr("-");
+				ft_putdouble(b);
+				ft_putstr(" / ");
+				ft_putdouble(2 * a);
+			}
+		}
+		else
+			ft_putdouble((-1 * b) / (2 * a));
+		ft_putendl("");
 	}
 }
 
 void	resolution(t_values *v, t_values *r)
 {
-	double kk = 16.34;
-	printf("\nres: %f\n",ft_sqrtdouble(kk));
-
 	double	a;
 	double	b;
 	double	c;
@@ -160,7 +255,6 @@ void	resolution(t_values *v, t_values *r)
 	a = (double)v->a - (double)r->a;
 	b = (double)v->b - (double)r->b;
 	c = (double)v->c - (double)r->c;
-
 	if (a < 0 || (a == 0 && b < 0) || (a == 0 && b == 0 && c < 0))
 	{
 		a *= -1;
