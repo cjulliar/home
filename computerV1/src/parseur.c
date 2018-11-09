@@ -52,6 +52,11 @@ int		isolation(char *str, int i, int n, t_values *v)
 		v->c += n;
 		return (i);
 	}
+	if (str[i + 2] != '^')
+	{
+		v->b = n;
+		return(i + 2);
+	}
 	i += 3;
 	if (str[i] == '2') // si le mec met 02 ca marche pas, il faut atoi la puissance
 		v->a += n;
@@ -89,14 +94,11 @@ int		analyse(char *str, int i, t_values *v)
 }
 
 int		parseur(char *strO, t_values *v, t_values *r) // et les nombre a virgule ????
-{
+{// et les 3x sans le *
 	char *str;
-	str = ft_nospace(strO);
-	printf("\n%s\n\n",str);
-
-
 	int		i;
 
+	str = ft_nospace(strO);
 	i = 0;
 	while(str[i] != '=')
 	{

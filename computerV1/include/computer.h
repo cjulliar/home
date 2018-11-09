@@ -15,7 +15,7 @@
 
 # include "../libft/libft.h"
 
-typedef struct	s_values
+typedef struct	s_values //passer ca en double
 {
 	int		a;
 	int		b;
@@ -24,5 +24,7 @@ typedef struct	s_values
 
 int				main(int ac, char **ag);
 int				parseur(char *str, t_values *v, t_values *r);
+void			resolution(t_values *v, t_values *r);
+
 
 #endif

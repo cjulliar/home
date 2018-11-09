@@ -14,6 +14,25 @@
 #include <unistd.h>
 #include <stdio.h>
 
+char	*ft_upper(char *str)
+{
+	char	*rep;
+	int		i;
+	
+	rep = (char *)malloc(sizeof(char) * ((int)ft_strlen(str) + 1));
+	rep[ft_strlen(str)] = '\0';
+	i = 0;
+	while(str[i] != '\0')
+	{
+		if (str[i] >= 'a' && str[i]<= 'z')
+			rep[i] = str[i] - 32;
+		else
+			rep[i] = str[i];
+		i++;
+	}
+	return (rep);
+}
+
 int		main(int ac, char **ag)
 {
 	t_values *v;
@@ -29,12 +48,12 @@ int		main(int ac, char **ag)
 	r->a = 0;
 	r->b = 0;
 	r->c = 0;
-	if (ac == 1 || parseur(ag[1], v, r) == 0)
+	if (ac == 1 || parseur(ft_upper(ag[1]), v, r) == 0)
 		ft_putstr("You have to note an equation.\n\nLike this: a * X ^ 2 + b * X ^ 1 + c * X ^ 1.i\nwith a, b and c numeric numbers.\n");
 	
-	// traitement  mathematique
-	printf("%d x2 + %d x + %d = ",v->a,v->b,v->c);
-	printf("%d x2 + %d x + %d\n",r->a,r->b,r->c);
+	resolution(v,r);
+	// printf("%d x2 + %d x + %d = ",v->a,v->b,v->c);
+	// printf("%d x2 + %d x + %d\n",r->a,r->b,r->c);
 
 	return (0);
 }

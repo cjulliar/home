@@ -12,7 +12,7 @@
 
 NAME = computer
 
-SRC = src/main.c src/parseur.c
+SRC = src/main.c src/parseur.c src/resolution.c
 
 HEADER = include/computer.h libft/libft.h
 
