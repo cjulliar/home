@@ -74,6 +74,8 @@ int		ft_puissance(int i, int p)
 
 int		ft_isinteger(double n, int v)
 {
+	if (n < 0)
+		n *= -1;
 	if (((int)(n * 1000000) % (1000000 / (ft_puissance(10,v)))) > 0)
 		return (0);
 	return (1);
@@ -86,16 +88,17 @@ void	reduced_forme(double a, double b, double c)
 	if (a != 0)
 	{
 		ft_putdouble(a);
-		if (b < 0)
-		{
-			ft_putstr("x² - ");
-			b *= -1;
-		}
-		else
-			ft_putstr("x² + ");
+		ft_putstr("x²");
 	}
 	if (b != 0)
 	{
+		if (b < 0)
+		{
+			ft_putstr(" - ");
+			b *= -1;
+		}
+		else
+			ft_putstr(" + ");
 		ft_putdouble(b);
 		ft_putchar('x');
 	}
@@ -176,12 +179,11 @@ void	degre2reeldev(double a, double b, double d, char s)
 void	degre2reelnum(double a, double b, double d, char s)
 {
 	double r;
-	printf("degre2reelnum\n");
+
 	if (s == '+')
 		r = (-1 * b + ft_sqrtdouble(d)) / (2 * a);
 	else
 		r = (-1 * b - ft_sqrtdouble(d)) / (2 * a);
-		printf("r:%f\n",r);
 	if (ft_isinteger(r, 2) == 0)
 	{
 		if (s == '+')
@@ -192,10 +194,66 @@ void	degre2reelnum(double a, double b, double d, char s)
 		ft_putdouble(2 * a);
 	}
 	else
-		ft_sqrtdouble(r);
+		ft_putdouble(r);
 	ft_putendl("");
 	if (s == '+')
 		degre2reelnum(a, b, d, '-');
+}
+
+void	degre2dnul(double a, double b)
+{
+	ft_putendl("Discriminant is null, the solution is:");
+	if (ft_isinteger((-1 * b) / (2 * a), 2) == 0)
+	{
+		if ((b < 0 && a > 0) || (b > 0 && a < 0))
+		{
+			ft_putdouble(b);
+			ft_putstr(" / ");
+			ft_putdouble(2 * a);
+		}
+		else
+		{
+			if (a < 0 && b < 0)
+			{
+				a *= -1;
+				b *= -1;
+			}
+			ft_putstr("-");
+			ft_putdouble(b);
+			ft_putstr(" / ");
+			ft_putdouble(2 * a);
+		}
+	}
+	else
+		ft_putdouble((-1 * b) / (2 * a));
+	ft_putendl("");
+}
+
+void	degre2dneg(double a, double b, double d, char s)
+{
+	ft_putstr("(");
+	if(b < 0)
+		ft_putdouble(-1 * b);
+	else
+	{
+		ft_putstr("-");
+		ft_putdouble(b);
+	}
+	ft_putstr(" ");
+	ft_putchar(s);
+	ft_putstr(" i");
+	if (ft_isinteger(ft_sqrtdouble(ft_absdouble(d)), 2) == 0)
+	{
+		ft_putstr("√");
+		ft_putdouble(ft_absdouble(d));
+	}
+	else
+		ft_putdouble(ft_sqrtdouble(ft_absdouble(d)));
+	ft_putstr(") / ");
+	ft_putdouble(2*a);
+	ft_putendl("");
+	if (s == '+')
+		degre2dneg(a, b, d, '-');
 }
 
 void	degre2(double a, double b, double c)
@@ -217,32 +275,11 @@ void	degre2(double a, double b, double c)
 			degre2reelnum(a, b, d, '+');
 	}
 	else if (d == 0)
+		degre2dnul(a, b);
+	else
 	{
-		ft_putendl("Discriminant is null, the solution is:");
-		if (ft_isinteger((-1 * b) / (2 * a), 2) == 0)
-		{
-			if ((b < 0 && a > 0) || (b > 0 && a < 0))
-			{
-				ft_putdouble(b);
-				ft_putstr(" / ");
-				ft_putdouble(2 * a);
-			}
-			else
-			{
-				if (a < 0 && b < 0)
-				{
-					a *= -1;
-					b *= -1;
-				}
-				ft_putstr("-");
-				ft_putdouble(b);
-				ft_putstr(" / ");
-				ft_putdouble(2 * a);
-			}
-		}
-		else
-			ft_putdouble((-1 * b) / (2 * a));
-		ft_putendl("");
+		ft_putendl("Discriminant is strictly negative, the two solutions are:");
+		degre2dneg(a, b, d, '+');
 	}
 }
 
