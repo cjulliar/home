@@ -6,7 +6,7 @@
 /*   By: cjulliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 11:42:11 by cjulliar          #+#    #+#             */
-/*   Updated: 2018/11/09 14:33:30 by cjulliar         ###   ########.fr       */
+/*   Updated: 2018/11/12 11:45:45 by cjulliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,7 @@ int		ft_isinteger(double n, int v)
 
 void	reduced_forme(double a, double b, double c)
 {
-	if (a != 0 || b != 0 || c != 0)
-		ft_putstr("Reduced form: ");
+	ft_putstr("Reduced form: ");
 	if (a != 0)
 	{
 		ft_putdouble(a);
@@ -104,24 +103,29 @@ void	reduced_forme(double a, double b, double c)
 	}
 	if (c != 0)
 	{
-		if (c < 0)
+		if (c < 0 && a != 0 && b != 0)
 		{
 			ft_putstr(" - ");
 			c *= -1;
 		}
-		else
+		else if (a != 0 && b != 0)
 			ft_putstr(" + ");
 		ft_putdouble(c);
 	}
 	if (a != 0 || b != 0 || c != 0)
 		ft_putendl(" = 0");
+	else
+		ft_putendl("0 = 0");
 }
 
 void	degre0(double c)
 {
 	ft_putendl("Polynomial degree: 0");
 	ft_putendl("The solution is:");
-	ft_putdouble(c);
+	if (c != 0)
+		ft_putstr("false");
+	else
+		ft_putdouble(c);
 	ft_putendl("");
 }
 
@@ -245,7 +249,7 @@ void	degre2dneg(double a, double b, double d, char s)
 	if (ft_isinteger(ft_sqrtdouble(ft_absdouble(d)), 2) == 0)
 	{
 		ft_putstr("√");
-		ft_putdouble(ft_absdouble(d));
+		ft_putdouble(ft_absdouble(d)); // si sqrt a trop de virgule afficher en (x/y)
 	}
 	else
 		ft_putdouble(ft_sqrtdouble(ft_absdouble(d)));

@@ -6,7 +6,7 @@
 /*   By: cjulliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 16:43:35 by cjulliar          #+#    #+#             */
-/*   Updated: 2017/02/01 09:52:49 by cjulliar         ###   ########.fr       */
+/*   Updated: 2018/11/12 11:25:32 by cjulliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,8 @@ size_t			ft_strfold(size_t v1, size_t v2, size_t len);
 void			ft_swap(int *c1, int *c2);
 size_t			ft_isspace(char c);
 int				get_next_line(int fd, char **line);
+double			ft_atoidouble(const char *str);
+int				ft_puissance(int i, int p);
+double			ft_puissancedouble(double i, int p);
 
 #endif

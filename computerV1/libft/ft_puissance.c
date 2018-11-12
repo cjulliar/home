@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   computer.h                                         :+:      :+:    :+:   */
+/*   ft_puissance.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cjulliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/05 12:21:37 by cjulliar          #+#    #+#             */
-/*   Updated: 2018/11/12 11:33:46 by cjulliar         ###   ########.fr       */
+/*   Created: 2018/11/12 11:14:24 by cjulliar          #+#    #+#             */
+/*   Updated: 2018/11/12 11:14:53 by cjulliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COMPUTER_H
-# define COMPUTER_H
-
-# include "../libft/libft.h"
-
-typedef struct	s_values //passer ca en double
+int		ft_puissance(int i, int p)
 {
-	double		a;
-	double		b;
-	double		c;
-}				t_values;
+	int		r;
 
-int				main(int ac, char **ag);
-int				parseur(char *str, t_values *v, t_values *r);
-void			resolution(t_values *v, t_values *r);
-
-
-#endif
+	r = 1;
+	while (p > 0)
+	{
+		r *= i;
+		p--;
+	}
+	return (r);
+}

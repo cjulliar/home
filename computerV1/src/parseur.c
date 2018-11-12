@@ -6,7 +6,7 @@
 /*   By: cjulliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 08:40:07 by cjulliar          #+#    #+#             */
-/*   Updated: 2018/11/06 09:49:17 by cjulliar         ###   ########.fr       */
+/*   Updated: 2018/11/12 12:52:13 by cjulliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,27 @@ char *ft_nospace(char *str)
 	return (rep);
 }
 
-int		isolation(char *str, int i, int n, t_values *v)
+int		isolation(char *str, int i, double n, t_values *v)
 {
-	if (str[i] != '*')
+//	printf("i:[%c] +1:[%c] +2:[%c] +3:[%c] +4:[%c]\n",str[i],str[i+1],str[i+2],str[i+3],str[i+4]);
+	if (str[i] != '*' && str[i] != 'X')
 	{
 		v->c += n;
 		return (i);
 	}
-	if (str[i + 2] != '^')
+	if (str[i] == '*')
+		i++;
+	if (str[i + 1] != '^')
 	{
 		v->b = n;
 		return(i + 2);
 	}
-	i += 3;
+	i += 2;
+	while (str[i] == '0' && str[i] != '\0')
+		i++;
+//	printf("--i:[%c] +1:[%c] . %d\n",str[i],str[i+1],ft_isdigit(str[i+1]));
+	if (ft_isdigit(str[i+1]) == 1)
+		return (-1);
 	if (str[i] == '2') // si le mec met 02 ca marche pas, il faut atoi la puissance
 		v->a += n;
 	else if (str[i] == '1')
@@ -88,13 +96,25 @@ int		analyse(char *str, int i, t_values *v)
 		y++;
 		i++;
 	}
-	i = isolation(str,i,ft_atoi(n),v);
+	if (str[i] == '.')
+	{
+		i++;
+		n[y] = '.';
+		y++;
+		while (ft_isdigit(str[i]))
+		{
+			n[y] = str[i];
+			y++;
+			i++;
+		}
+	}
+	i = isolation(str,i,ft_atoidouble(n),v);
 
 	return (i);
 }
 
-int		parseur(char *strO, t_values *v, t_values *r) // et les nombre a virgule ????
-{// et les 3x sans le *
+int		parseur(char *strO, t_values *v, t_values *r)
+{
 	char *str;
 	int		i;
 
@@ -102,11 +122,15 @@ int		parseur(char *strO, t_values *v, t_values *r) // et les nombre a virgule ??
 	i = 0;
 	while(str[i] != '=')
 	{
+		printf("str[%d]: %c\n",i,str[i]);
 		if (str[i] == '\0')
-			return (0);
+		{	printf("error pas de '='\n");
+			return (0);}
 		if (ft_isdigit(str[i]) == 1 || str[i] == '-')
 		{
-			i = analyse(str,i,v) - 1;	
+			i = analyse(str,i,v) - 1;
+			if (i == -1)
+				return (-1);
 		}
 		i++;
 	}
@@ -114,7 +138,9 @@ int		parseur(char *strO, t_values *v, t_values *r) // et les nombre a virgule ??
 	{
 		if (ft_isdigit(str[i]) == 1 || str[i] == '-')
 		{
-			i = analyse(str,i,r) - 1;	
+			i = analyse(str,i,r) - 1;
+			if (i == -1)
+				return (-1);
 		}
 		i++;
 	}
