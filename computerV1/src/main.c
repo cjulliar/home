@@ -12,7 +12,6 @@
 
 #include "../include/computer.h"
 #include <unistd.h>
-#include <stdio.h>
 
 char	*ft_upper(char *str)
 {
@@ -49,7 +48,6 @@ int		main(int ac, char **ag)
 	r->a = 0;
 	r->b = 0;
 	r->c = 0;
-	printf("ac:%d\n",ac);
 	ok = 0;
 	if (ac == 1 || (ok = parseur(ft_upper(ag[1]), v, r)) == 0)
 	{
@@ -58,15 +56,21 @@ int		main(int ac, char **ag)
 		ft_putstr("or like this: a*X^2 + b*X^1 + c*X^0 = ");
 		ft_putendl("a'*X^2 + b'*X^1 + c'*X^0");
 		ft_putendl("with a, b and c numeric numbers.");
-		printf("ok: %d\n",ok);
 	}
 	else if (ok == -1)
 	{
 		ft_putstr("The polynomial degree must below than 3 and positive, ");
 		ft_putendl("I can't solve that.");
 	}
+	else if (ok == -2)
+	{
+		ft_putendl("You have to note an equation.");
+		ft_putendl("Like this: a * X ^ 2 + b * X ^ 1 + c * X ^ 0 = 0");
+		ft_putendl("with a, b and c numeric numbers.");
+	}
 	else
 		resolution(v,r);
-
+	free (v);
+	free (r);
 	return (0);
 }

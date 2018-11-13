@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../include/computer.h"
-#include <stdio.h>
 
 int		ft_abs(int i)
 {
@@ -91,24 +90,25 @@ void	reduced_forme(double a, double b, double c)
 	}
 	if (b != 0)
 	{
-		if (b < 0)
+		if (b < 0 && a != 0)
 		{
 			ft_putstr(" - ");
 			b *= -1;
 		}
-		else
+		else if (a != 0)
 			ft_putstr(" + ");
-		ft_putdouble(b);
+		if (b != 1)
+			ft_putdouble(b);
 		ft_putchar('x');
 	}
 	if (c != 0)
 	{
-		if (c < 0 && a != 0 && b != 0)
+		if (c < 0 && (a != 0 || b != 0))
 		{
 			ft_putstr(" - ");
 			c *= -1;
 		}
-		else if (a != 0 && b != 0)
+		else if (a != 0 || b != 0)
 			ft_putstr(" + ");
 		ft_putdouble(c);
 	}
@@ -157,27 +157,6 @@ void	degre1(double b, double c)
 	else
 		ft_putdouble(r);
 	ft_putendl("");
-}
-
-
-void	degre2reeldev(double a, double b, double d, char s)
-{
-
-	printf("degre2reeldev\n");
-	if (b > 0)
-		ft_putstr("(-");
-	else
-		ft_putstr("(");
-	ft_putdouble(b);
-	ft_putstr(" ");
-	ft_putchar(s);
-	ft_putstr(" √");
-	ft_putdouble(d);
-	ft_putstr(") / ");
-	ft_putdouble(2*a);
-	ft_putendl("");
-	if (s == '+')
-		degre2reeldev(a, b, d, '-');
 }
 
 void	degre2reelnum(double a, double b, double d, char s)
@@ -233,31 +212,38 @@ void	degre2dnul(double a, double b)
 	ft_putendl("");
 }
 
-void	degre2dneg(double a, double b, double d, char s)
+void	degre2pn(double a, double b, double d, char s)
 {
-	ft_putstr("(");
+	if (b != 0 && d != 0)
+		ft_putstr("(");
 	if(b < 0)
 		ft_putdouble(-1 * b);
-	else
+	else if (b > 0)
 	{
 		ft_putstr("-");
 		ft_putdouble(b);
 	}
-	ft_putstr(" ");
-	ft_putchar(s);
-	ft_putstr(" i");
+	if (b != 0)
+		ft_putstr(" ");
+	if (b != 0 || s == '-')
+		ft_putchar(s);
+		ft_putstr(" ");
+	if (d < 0)
+		ft_putstr("i");
 	if (ft_isinteger(ft_sqrtdouble(ft_absdouble(d)), 2) == 0)
 	{
 		ft_putstr("√");
-		ft_putdouble(ft_absdouble(d)); // si sqrt a trop de virgule afficher en (x/y)
+		ft_putdouble(ft_absdouble(d));
 	}
 	else
 		ft_putdouble(ft_sqrtdouble(ft_absdouble(d)));
-	ft_putstr(") / ");
+	if (b != 0 && d != 0)
+		ft_putstr(")");
+	ft_putstr(" / ");
 	ft_putdouble(2*a);
 	ft_putendl("");
 	if (s == '+')
-		degre2dneg(a, b, d, '-');
+		degre2pn(a, b, d, '-');
 }
 
 void	degre2(double a, double b, double c)
@@ -273,8 +259,8 @@ void	degre2(double a, double b, double c)
 	if (d > 0)
 	{
 		ft_putendl("Discriminant is strictly positive, the two solutions are:");
-		if (ft_isinteger(ft_sqrtdouble(d), 0) == 0)
-			degre2reeldev(a, b, d, '+');
+		if (ft_isinteger(ft_sqrtdouble(d), 2) == 0)
+			degre2pn(a, b, d, '+');
 		else
 			degre2reelnum(a, b, d, '+');
 	}
@@ -283,7 +269,7 @@ void	degre2(double a, double b, double c)
 	else
 	{
 		ft_putendl("Discriminant is strictly negative, the two solutions are:");
-		degre2dneg(a, b, d, '+');
+		degre2pn(a, b, d, '+');
 	}
 }
 
@@ -308,7 +294,7 @@ void	resolution(t_values *v, t_values *r)
 		degre0(c);
 	else if (a == 0 && c == 0 && v->a == 0 && b == 0 && v->b != 0)
 		degre1nul();
-	else if (a == 0 && v->a != 0 && b == 0 && v->b == 0 && c == 0)
+	else if (a != 0 && b == 0 && c == 0)
 		degre2nul();
 	else if (a == 0 && v-> a == 0)
 		degre1(b, c);

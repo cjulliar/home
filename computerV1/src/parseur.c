@@ -11,7 +11,14 @@
 /* ************************************************************************** */
 
 #include "../include/computer.h"
-#include <stdio.h>
+
+int		ft_ismath(char c)
+{
+	if (c != '-' && c != '+' && c != '*' && c != '/' && c != '%' 
+		&& c != 'x' && c != 'X' && c != '.' && c != '^' && c != '=')
+		return (0);
+	return (1);
+}
 
 char *ft_nospace(char *str)
 {
@@ -23,7 +30,9 @@ char *ft_nospace(char *str)
 	tr = 0;
 	while (str[ts] != '\0')
 	{
-		// ajouter ici verif de carac valide
+		if (ft_isspace(str[ts]) == 0 && ft_isdigit(str[ts]) == 0 
+			&& ft_ismath(str[ts]) == 0)
+			return ("");
 		if (ft_isspace(str[ts]) == 0)
 			tr++;
 		ts++;
@@ -47,7 +56,6 @@ char *ft_nospace(char *str)
 
 int		isolation(char *str, int i, double n, t_values *v)
 {
-//	printf("i:[%c] +1:[%c] +2:[%c] +3:[%c] +4:[%c]\n",str[i],str[i+1],str[i+2],str[i+3],str[i+4]);
 	if (str[i] != '*' && str[i] != 'X')
 	{
 		v->c += n;
@@ -55,18 +63,19 @@ int		isolation(char *str, int i, double n, t_values *v)
 	}
 	if (str[i] == '*')
 		i++;
+	if (ft_isdigit(str[i]) == 1)
+		return (-1);
 	if (str[i + 1] != '^')
 	{
 		v->b = n;
-		return(i + 2);
+		return(i + 1);
 	}
 	i += 2;
 	while (str[i] == '0' && str[i] != '\0')
 		i++;
-//	printf("--i:[%c] +1:[%c] . %d\n",str[i],str[i+1],ft_isdigit(str[i+1]));
 	if (ft_isdigit(str[i+1]) == 1)
 		return (-1);
-	if (str[i] == '2') // si le mec met 02 ca marche pas, il faut atoi la puissance
+	if (str[i] == '2')
 		v->a += n;
 	else if (str[i] == '1')
 		v->b += n;
@@ -107,6 +116,8 @@ int		analyse(char *str, int i, t_values *v)
 			y++;
 			i++;
 		}
+		if (str[i]=='.')
+			return (-1);
 	}
 	i = isolation(str,i,ft_atoidouble(n),v);
 
@@ -119,18 +130,22 @@ int		parseur(char *strO, t_values *v, t_values *r)
 	int		i;
 
 	str = ft_nospace(strO);
+	if (str[0] == '\0')
+		return (-2);
 	i = 0;
 	while(str[i] != '=')
 	{
-		printf("str[%d]: %c\n",i,str[i]);
 		if (str[i] == '\0')
-		{	printf("error pas de '='\n");
-			return (0);}
-		if (ft_isdigit(str[i]) == 1 || str[i] == '-')
+			return (0);
+		if (str[i] == '+' && str[i+1] == 'X')
+			v->b += 1;
+		else if (str[i] == '-' && str[i+1] == 'X')
+			v->b -= 1;
+		else if (ft_isdigit(str[i]) == 1 || str[i] == '-')
 		{
 			i = analyse(str,i,v) - 1;
-			if (i == -1)
-				return (-1);
+			if (i < 0)
+				return (i);
 		}
 		i++;
 	}
@@ -139,8 +154,8 @@ int		parseur(char *strO, t_values *v, t_values *r)
 		if (ft_isdigit(str[i]) == 1 || str[i] == '-')
 		{
 			i = analyse(str,i,r) - 1;
-			if (i == -1)
-				return (-1);
+			if (i < 0)
+				return (i);
 		}
 		i++;
 	}
