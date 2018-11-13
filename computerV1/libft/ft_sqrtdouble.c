@@ -1,13 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_sqrtdouble.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cjulliar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/11/13 14:48:12 by cjulliar          #+#    #+#             */
+/*   Updated: 2018/11/13 14:49:25 by cjulliar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 double	ft_sqrtdouble(double n)
 {
-	double x = 1;
-	double y = 0.5*(1+n);
-	while (ft_absdouble(y-x) > 0.0001)
+	double x;
+	double y;
+
+	x = 1;
+	y = 0.5 * (1 + n);
+	while (ft_absdouble(y - x) > 0.0001)
 	{
 		x = y;
-		y = 0.5 * (x+n/x);
+		y = 0.5 * (x + n / x);
 	}
 	return (y);
 }

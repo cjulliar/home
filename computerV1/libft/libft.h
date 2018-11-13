@@ -6,7 +6,7 @@
 /*   By: cjulliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 16:43:35 by cjulliar          #+#    #+#             */
-/*   Updated: 2018/11/12 11:25:32 by cjulliar         ###   ########.fr       */
+/*   Updated: 2018/11/13 14:44:03 by cjulliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ void			ft_putdouble(double n);
 double			ft_absdouble(double i);
 int				ft_abs(int i);
 int				ft_ismath(char c);
-char 			*ft_nospace(char *str);
 char			*ft_upper(char *str);
 
 #endif

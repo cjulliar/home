@@ -6,7 +6,7 @@
 /*   By: cjulliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 12:21:37 by cjulliar          #+#    #+#             */
-/*   Updated: 2018/11/12 11:33:46 by cjulliar         ###   ########.fr       */
+/*   Updated: 2018/11/13 16:54:17 by cjulliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "../libft/libft.h"
 
-typedef struct	s_values //passer ca en double
+typedef struct	s_values
 {
 	double		a;
 	double		b;
@@ -25,6 +25,10 @@ typedef struct	s_values //passer ca en double
 int				main(int ac, char **ag);
 int				parseur(char *str, t_values *v, t_values *r);
 void			resolution(t_values *v, t_values *r);
-
+char			*ft_nospace(char *str);
+int				isolation(char *str, int i, double n, t_values *v);
+void			reduced_forme(double a, double b, double c);
+void			reponse(double a, double b, double c, t_values *v);
+void			degre2(double a, double b, double c);
 
 #endif
