@@ -12,48 +12,6 @@
 
 #include "../include/computer.h"
 
-int		ft_ismath(char c)
-{
-	if (c != '-' && c != '+' && c != '*' && c != '/' && c != '%' 
-		&& c != 'x' && c != 'X' && c != '.' && c != '^' && c != '=')
-		return (0);
-	return (1);
-}
-
-char *ft_nospace(char *str)
-{
-	char	*rep;
-	int		ts;
-	int		tr;
-
-	ts = 0;
-	tr = 0;
-	while (str[ts] != '\0')
-	{
-		if (ft_isspace(str[ts]) == 0 && ft_isdigit(str[ts]) == 0 
-			&& ft_ismath(str[ts]) == 0)
-			return ("");
-		if (ft_isspace(str[ts]) == 0)
-			tr++;
-		ts++;
-	}
-	if ((rep = (char *)malloc(sizeof(char) * (tr + 1))) == NULL)
-		return (0);
-	rep[tr] = '\0';
-	ts = 0;
-	tr = 0;
-	while (str[ts] != '\0')
-	{
-		if (ft_isspace(str[ts]) == 0)
-		{
-			rep[tr] = str[ts];
-			tr++;
-		}
-		ts++;
-	}
-	return (rep);
-}
-
 int		isolation(char *str, int i, double n, t_values *v)
 {
 	if (str[i] != '*' && str[i] != 'X')

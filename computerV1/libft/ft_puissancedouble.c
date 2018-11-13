@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 double	ft_puissancedouble(double i, int p)
 {
 	double	r;

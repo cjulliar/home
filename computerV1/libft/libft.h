@@ -91,5 +91,13 @@ int				get_next_line(int fd, char **line);
 double			ft_atoidouble(const char *str);
 int				ft_puissance(int i, int p);
 double			ft_puissancedouble(double i, int p);
+int				ft_isinteger(double n, int v);
+double			ft_sqrtdouble(double n);
+void			ft_putdouble(double n);
+double			ft_absdouble(double i);
+int				ft_abs(int i);
+int				ft_ismath(char c);
+char 			*ft_nospace(char *str);
+char			*ft_upper(char *str);
 
 #endif
