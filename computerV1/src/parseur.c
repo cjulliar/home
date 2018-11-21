@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include "../include/computer.h"
-
-int		analyse2(char *str, int i, int y, char *n)
+// #include <stdio.h>
+int		isnumber(char *str, int i, int y, char *n)
 {
 	if (str[i] == '.')
 	{
@@ -54,7 +54,7 @@ int		analyse(char *str, int i, t_values *v)
 		y++;
 		i++;
 	}
-	i = analyse2(str, i, y, n);
+	i = isnumber(str, i, y, n);
 	if (i < 0)
 		return (i);
 	i = isolation(str, i, ft_atoidouble(n), v);
@@ -62,11 +62,10 @@ int		analyse(char *str, int i, t_values *v)
 	return (i);
 }
 
-int		parseur2(char *str, int i, t_values *v)
+int		firstpart(char *str, int i, t_values *v)
 {
 	if (str[0] == '\0')
-		return (-2);
-	i = 0;
+		return (-1);
 	while (str[i] != '=')
 	{
 		if (str[i] == '\0')
@@ -86,28 +85,64 @@ int		parseur2(char *str, int i, t_values *v)
 	return (i);
 }
 
+int		secondpart(char *str, int i, t_values *v)
+{
+	while (str[i] != '\0')
+	{
+		if (str[i] == '=')
+			return (0);
+		if (str[i] == '+' && str[i + 1] == 'X')
+			v->b += 1;
+		else if (str[i] == '-' && str[i + 1] == 'X')
+			v->b -= 1;
+		else if (ft_isdigit(str[i]) == 1 || str[i] == '-')
+		{
+			i = analyse(str, i, v) - 1;
+			if (i < 0)
+			{
+				// printf("i: %d\n",i);
+				return (i);
+			}
+		}
+		i++;
+	}
+	return (i);
+}
+
 int		parseur(char *st, t_values *v, t_values *r)
 {
 	char	*str;
 	int		i;
 
 	str = ft_nospace(st);
-	i = parseur2(str, 0, v);
+	// printf("str: (%s)\n",str );
+	i = firstpart(str, 0, v); // si +x gere le cas pour b
+	
 	if (i <= 0)
-		return (i);
-	while (str[i] != '\0')
 	{
-		if (ft_isdigit(str[i]) == 1 || str[i] == '-')
-		{
-			i = analyse(str, i, r) - 1;
-			if (i < 0)
-			{
-				free(str);
-				return (i);
-			}
-		}
-		i++;
+		// free(str);
+		return (i);
 	}
+	// printf("i: %d[%c]\n",i,str[i]);
+	i = secondpart(str, i + 1, r);
+	if (i <= 0)
+	{
+		// free(str);
+		return (i);
+	}
+	// while (str[i] != '\0') // lancer first part avec r
+	// {
+	// 	if (ft_isdigit(str[i]) == 1 || str[i] == '-')
+	// 	{
+	// 		i = analyse(str, i, r) - 1;
+	// 		if (i < 0)
+	// 		{
+	// 			free(str);
+	// 			return (i);
+	// 		}
+	// 	}
+	// 	i++;
+	// }
 	free(str);
 	return (1);
 }

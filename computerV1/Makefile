@@ -13,7 +13,7 @@
 NAME = computer
 
 SRC = src/main.c src/parseur.c src/resolution.c src/ft_nospace.c \
-	  src/parseur2.c src/reduced_forme.c src/reponse.c src/degre2.c
+	  src/isolation.c src/reduced_forme.c src/reponse.c src/degre2.c
 
 HEADER = include/computer.h libft/libft.h
 

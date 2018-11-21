@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../include/computer.h"
-
+// #include <stdio.h>
 char	*ft_attribution(char *rep, char *str, int ts, int tr)
 {
 	rep[tr] = '\0';
@@ -31,21 +31,39 @@ char	*ft_attribution(char *rep, char *str, int ts, int tr)
 int		verif(char *s)
 {
 	int		i;
-
+	// printf("s: (%s)\n",s );
 	i = 1;
 	while (s[i] != '\0')
 	{
-		if (s[i] == '/' || s[i] == '%')
+		if (s[i] == 'X' && (s[i - 1] == '+' || s[i - 1] == '-'))
+			i++;
+		else if (s[i - 1] == 'X' && (s[i] == '+' || s[i] == '-'))
+			i++;
+		else if (s[i] == '=' && s[i - 1] == '=')
 			return (0);
-		else if (s[i] == '*' && (s[i - 1] < '0' || s[i - 1] > '9'))
+			// {printf("error 5 deux egals de suite\n");return (0);}
+		else if (s[i] == '/' || s[i] == '%')
 			return (0);
-		else if ((s[i] == 'x' || s[i] == 'X') && (s[i - 1] == '*' ||
+			// {printf("error 1 mauvais carac math\n");return (0);}
+		else if (s[i] == '*' && (s[i - 1] < '0' || s[i - 1] > '9') &&
+			s[i + 1] != 'X')
+			return (0);
+			// {printf("error 2\n");return (0);}
+		
+		else if (s[i] == '^' && s[i - 1] != 'X')
+			return (0);
+			// {printf("error 3\n");return (0);}
+		else if (s[i] == 'X' && ft_isnumeric(s[i + 1]) == 1)
+			return (0);
+			// {printf("error 6\n");return (0);}
+		else if (s[i] == 'X' && (s[i - 1] == '*' || // doit etre avant l erreur 4
 					(s[i - 1] >= '0' && s[i - 1] <= '9')))
 			i++;
-		else if (s[i] == '^' && (s[i - 1] != 'X' || s[i - 1] != 'x'))
+		else if (ft_ismath(s[i]) == 1 && ft_ismath(s[i - 1]) == 1
+			&& s[i - 1] != '=')
 			return (0);
-		else if (ft_ismath(s[i]) == 1 && ft_ismath(s[i - 1]) == 1)
-			return (0);
+			// {printf("error4: [%c] [%c]\n",s[i-1],s[i]);printf("error 4\n");return (0);}
+		
 		i++;
 	}
 	return (1);
@@ -78,7 +96,7 @@ char	*ft_nospace(char *str)
 		str = test_space(str, ts);
 		if (ft_isspace(str[ts]) == 0 && ft_isdigit(str[ts]) == 0
 			&& ft_ismath(str[ts]) == 0)
-			return ("");
+			return ("\0");
 		if (ft_isspace(str[ts]) == 0)
 			tr++;
 		ts++;
@@ -89,7 +107,7 @@ char	*ft_nospace(char *str)
 	if (verif(rep) == 0)
 	{
 		free(rep);
-		return ("");
+		return ("\0");
 	}
 	return (rep);
 }

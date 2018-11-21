@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../include/computer.h"
-
+// #include <stdio.h>
 void	speak(void)
 {
 	ft_putendl("You have to note an equation.");
@@ -31,12 +31,12 @@ void	to_error_on_not(int ac, char **ag, t_values *v, t_values *r, int ok)
 	ok = parseur(s, v, r);
 	if (ac == 1 || ok == 0)
 		speak();
-	else if (ok == -1)
-	{
+	else if (ok == -2) // verifier que tout est bon sur les retour erreur,
+	{// normalement le -2 va a la place du -1 et vice versa, ca marchait pas sur les ^3
 		ft_putstr("The polynomial degree must below than 3 and positive, ");
 		ft_putendl("I can't solve that.");
 	}
-	else if (ok == -2)
+	else if (ok == -1)
 	{
 		ft_putendl("You have to note an equation.");
 		ft_putendl("Like this: a * X ^ 2 + b * X ^ 1 + c * X ^ 0 = 0");
@@ -62,6 +62,8 @@ int		main(int ac, char **ag)
 	r->b = 0;
 	r->c = 0;
 	to_error_on_not(ac, ag, v, r, 0);
+	// printf("v(%.2f %.2F %.2F)\n",v->a,v->b,v->c);
+	// printf("r(%.2f %.2F %.2F)\n",r->a,r->b,r->c);
 	free(v);
 	free(r);
 	return (0);

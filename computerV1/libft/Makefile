@@ -22,7 +22,7 @@ SOURCE = ft_memset ft_bzero ft_memcpy ft_memccpy ft_memmove ft_memchr \
 		 ft_putnbr_fd ft_lstnew ft_lstdelone ft_lstdel ft_lstadd ft_lstiter \
 		 ft_lstmap ft_strfold ft_swap ft_isspace get_next_line ft_atoidouble \
 		 ft_puissance ft_puissancedouble ft_isinteger ft_sqrtdouble ft_ismath \
-		 ft_putdouble ft_absdouble ft_abs ft_upper
+		 ft_putdouble ft_absdouble ft_abs ft_upper ft_isnumeric
 
 NAME = libft.a
 HEADER = libft.h

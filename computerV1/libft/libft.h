@@ -98,5 +98,7 @@ double			ft_absdouble(double i);
 int				ft_abs(int i);
 int				ft_ismath(char c);
 char			*ft_upper(char *str);
+int				ft_isnumeric(char c);
+
 
 #endif

@@ -61,7 +61,7 @@ void	reponse(double a, double b, double c, t_values *v)
 		degre1nul();
 	else if (a != 0 && b == 0 && c == 0)
 		degre2nul();
-	else if (a == 0 && v->a == 0)
+	else if (a == 0)
 		degre1(b, c);
 	else
 		degre2(a, b, c);
