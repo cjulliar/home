@@ -6,12 +6,12 @@
 /*   By: cjulliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 08:40:07 by cjulliar          #+#    #+#             */
-/*   Updated: 2018/11/13 17:41:06 by cjulliar         ###   ########.fr       */
+/*   Updated: 2018/11/21 12:32:00 by cjulliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/computer.h"
-// #include <stdio.h>
+
 int		isnumber(char *str, int i, int y, char *n)
 {
 	if (str[i] == '.')
@@ -99,10 +99,7 @@ int		secondpart(char *str, int i, t_values *v)
 		{
 			i = analyse(str, i, v) - 1;
 			if (i < 0)
-			{
-				// printf("i: %d\n",i);
 				return (i);
-			}
 		}
 		i++;
 	}
@@ -115,34 +112,12 @@ int		parseur(char *st, t_values *v, t_values *r)
 	int		i;
 
 	str = ft_nospace(st);
-	// printf("str: (%s)\n",str );
-	i = firstpart(str, 0, v); // si +x gere le cas pour b
-	
+	i = firstpart(str, 0, v);
 	if (i <= 0)
-	{
-		// free(str);
 		return (i);
-	}
-	// printf("i: %d[%c]\n",i,str[i]);
 	i = secondpart(str, i + 1, r);
 	if (i <= 0)
-	{
-		// free(str);
 		return (i);
-	}
-	// while (str[i] != '\0') // lancer first part avec r
-	// {
-	// 	if (ft_isdigit(str[i]) == 1 || str[i] == '-')
-	// 	{
-	// 		i = analyse(str, i, r) - 1;
-	// 		if (i < 0)
-	// 		{
-	// 			free(str);
-	// 			return (i);
-	// 		}
-	// 	}
-	// 	i++;
-	// }
 	free(str);
 	return (1);
 }

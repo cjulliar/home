@@ -6,7 +6,7 @@
 /*   By: cjulliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 16:27:25 by cjulliar          #+#    #+#             */
-/*   Updated: 2018/11/13 16:57:38 by cjulliar         ###   ########.fr       */
+/*   Updated: 2018/11/21 12:57:57 by cjulliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@ void	degre0(double c)
 	ft_putendl("");
 }
 
-void	degre1nul(void)
+void	allisgood(int i)
 {
-	ft_putendl("Polynomial degree: 1");
-	ft_putendl("All real number are solution.");
+	ft_putstr("Polynomial degree: ");
+	ft_putnbr(i);
+	ft_putendl("\nAll real number are solution.");
 }
 
 void	degre2nul(void)
@@ -55,12 +56,14 @@ void	degre1(double b, double c)
 
 void	reponse(double a, double b, double c, t_values *v)
 {
-	if (a == 0 && b == 0 && v->a == 0 && v->b == 0)
+	if (a == 0 && b == 0 && v->a == 0 && v->b == 0 && v->c != 0)
+		allisgood(0);
+	else if (a == 0 && b == 0 && v->a == 0 && v->b == 0)
 		degre0(c);
 	else if (a == 0 && c == 0 && v->a == 0 && b == 0 && v->b != 0)
-		degre1nul();
+		allisgood(1);
 	else if (a != 0 && b == 0 && c == 0)
-		degre2nul();
+		allisgood(2);
 	else if (a == 0)
 		degre1(b, c);
 	else

@@ -6,12 +6,12 @@
 /*   By: cjulliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/07 14:25:00 by cjulliar          #+#    #+#             */
-/*   Updated: 2018/11/13 17:40:51 by cjulliar         ###   ########.fr       */
+/*   Updated: 2018/11/21 12:57:54 by cjulliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/computer.h"
-// #include <stdio.h>
+
 void	speak(void)
 {
 	ft_putendl("You have to note an equation.");
@@ -21,18 +21,20 @@ void	speak(void)
 	ft_putendl("with a, b and c numeric numbers.");
 }
 
-void	to_error_on_not(int ac, char **ag, t_values *v, t_values *r, int ok)
+void	to_error_on_not(int ac, char **ag, t_values *v, t_values *r)
 {
 	char	*s;
+	int		ok;
 
+	ok = 0;
 	if (ac < 2 && (s = (char*)malloc(sizeof(char) * ft_strlen(ag[1]))) == NULL)
 		return ;
 	s = ft_upper(ag[1]);
 	ok = parseur(s, v, r);
 	if (ac == 1 || ok == 0)
 		speak();
-	else if (ok == -2) // verifier que tout est bon sur les retour erreur,
-	{// normalement le -2 va a la place du -1 et vice versa, ca marchait pas sur les ^3
+	else if (ok == -2)
+	{
 		ft_putstr("The polynomial degree must below than 3 and positive, ");
 		ft_putendl("I can't solve that.");
 	}
@@ -47,10 +49,25 @@ void	to_error_on_not(int ac, char **ag, t_values *v, t_values *r, int ok)
 	free(s);
 }
 
+// pour le projet il faut:
+//  5 * x^0 et les test autour
+//  x + 3 = 0 marche
+//  x^1 + 3 = 0 marche
+//  x^2 + 3 = 0 marche
+//  6x^2+x^2=0 marche
+//  6x^1+x^1=0 marche
+//  6x^0+x^0=0 marche
+//  
 int		main(int ac, char **ag)
 {
 	t_values	*v;
 	t_values	*r;
+
+	if (ac < 2)
+	{
+		speak();
+		return (0);
+	}
 	if ((v = (t_values *)malloc(sizeof(t_values))) == NULL)
 		return (0);
 	if ((r = (t_values *)malloc(sizeof(t_values))) == NULL)
@@ -61,9 +78,7 @@ int		main(int ac, char **ag)
 	r->a = 0;
 	r->b = 0;
 	r->c = 0;
-	to_error_on_not(ac, ag, v, r, 0);
-	// printf("v(%.2f %.2F %.2F)\n",v->a,v->b,v->c);
-	// printf("r(%.2f %.2F %.2F)\n",r->a,r->b,r->c);
+	to_error_on_not(ac, ag, v, r);
 	free(v);
 	free(r);
 	return (0);
