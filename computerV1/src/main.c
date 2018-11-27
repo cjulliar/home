@@ -6,7 +6,7 @@
 /*   By: cjulliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/07 14:25:00 by cjulliar          #+#    #+#             */
-/*   Updated: 2018/11/21 12:57:54 by cjulliar         ###   ########.fr       */
+/*   Updated: 2018/11/27 17:03:01 by cjulliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	to_error_on_not(int ac, char **ag, t_values *v, t_values *r)
 //  6x^2+x^2=0 marche
 //  6x^1+x^1=0 marche
 //  6x^0+x^0=0 marche
-//  
+// 3x + 4 = 0, degre 1, solution doit etre equation si trop complique !
 int		main(int ac, char **ag)
 {
 	t_values	*v;
