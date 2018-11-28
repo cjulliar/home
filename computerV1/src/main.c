@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../include/computer.h"
-
+#include <stdio.h> 
 void	speak(void)
 {
 	ft_putendl("You have to note an equation.");
@@ -49,6 +49,17 @@ void	to_error_on_not(int ac, char **ag, t_values *v, t_values *r)
 	free(s);
 }
 
+int		fichiertest()// a supprimer
+{
+	char **test = NULL;
+	test[0] = "./";
+	test[1] = "x^2=x";
+	if (main(1,test) == -1)
+		return (1);
+	return (0);
+}
+
+
 // pour le projet il faut:
 //  5 * x^0 et les test autour
 //  x + 3 = 0 marche
@@ -62,16 +73,21 @@ int		main(int ac, char **ag)
 {
 	t_values	*v;
 	t_values	*r;
-
+int ft;// (a supprimer)
+	if ((ft = fichiertest()) != 0) // a supprimer
+	{	
+		printf("error ficchier de test. test numero %d\n",ft );
+		return (-1);
+	}
 	if (ac < 2)
 	{
 		speak();
-		return (0);
+		return (-1);
 	}
 	if ((v = (t_values *)malloc(sizeof(t_values))) == NULL)
-		return (0);
+		return (-1);
 	if ((r = (t_values *)malloc(sizeof(t_values))) == NULL)
-		return (0);
+		return (-1);
 	v->a = 0;
 	v->b = 0;
 	v->c = 0;
