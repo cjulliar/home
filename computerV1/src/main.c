@@ -6,7 +6,7 @@
 /*   By: cjulliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/07 14:25:00 by cjulliar          #+#    #+#             */
-/*   Updated: 2018/11/27 17:03:01 by cjulliar         ###   ########.fr       */
+/*   Updated: 2018/11/28 10:05:45 by cjulliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,7 @@ void	to_error_on_not(int ac, char **ag, t_values *v, t_values *r)
 	free(s);
 }
 
-int		fichiertest()// a supprimer
-{
-	char **test = NULL;
-	test[0] = "./";
-	test[1] = "x^2=x";
-	if (main(1,test) == -1)
-		return (1);
-	return (0);
-}
+
 
 
 // pour le projet il faut:
@@ -69,16 +61,13 @@ int		fichiertest()// a supprimer
 //  6x^1+x^1=0 marche
 //  6x^0+x^0=0 marche
 // 3x + 4 = 0, degre 1, solution doit etre equation si trop complique !
-int		main(int ac, char **ag)
+int		main2(int ac, char **ag)
 {
+	ft_putendl("");
+	ft_putendl(ag[1]);
 	t_values	*v;
 	t_values	*r;
-int ft;// (a supprimer)
-	if ((ft = fichiertest()) != 0) // a supprimer
-	{	
-		printf("error ficchier de test. test numero %d\n",ft );
-		return (-1);
-	}
+
 	if (ac < 2)
 	{
 		speak();
@@ -97,5 +86,80 @@ int ft;// (a supprimer)
 	to_error_on_not(ac, ag, v, r);
 	free(v);
 	free(r);
+	return (0);
+}
+
+int		main(int ac, char **ag)// a supprimer
+{
+	if (main2(ac, ag) == -1)
+		return (1);
+/*
+	ag[1] = "x^2=x";
+	if (main2(ac, ag) == -1)
+		return (1);
+	ag[1] = "x ^2=x";
+	if (main2(ac, ag) == -1)
+		return (1);
+	ag[1] = "x^ 2=x";
+	if (main2(ac, ag) == -1)
+		return (1);
+	ag[1] = "x^2 =x";
+	if (main2(ac, ag) == -1)
+		return (1);
+	ag[1] = "x^2= x";
+	if (main2(ac, ag) == -1)
+		return (1);
+
+	ag[1] = "x^2+x-4=0";
+	if (main2(ac, ag) == -1)
+		return (1);
+	ag[1] = "x ^2+x-4=0";
+	if (main2(ac, ag) == -1)
+		return (1);
+	ag[1] = "x^ 2+x-4=0";
+	if (main2(ac, ag) == -1)
+		return (1);
+	ag[1] = "x^2 +x-4=0";
+	if (main2(ac, ag) == -1)
+		return (1);
+	ag[1] = "x^2+ x-4=0";
+	if (main2(ac, ag) == -1)
+		return (1);
+	ag[1] = "x^2+x -4=0";
+	if (main2(ac, ag) == -1)
+		return (1);
+	ag[1] = "x^2+x- 4=0";
+	if (main2(ac, ag) == -1)
+		return (1);
+	ag[1] = "x^2+x-4 =0";
+	if (main2(ac, ag) == -1)
+		return (1);
+	ag[1] = "x^2+x-4= 0";
+	if (main2(ac, ag) == -1)
+		return (1);
+*/
+/*
+	ag[1] = "3x^2+4x+3=0";
+	if (main2(ac, ag) == -1)
+		return (1);
+	ag[1] = "3x^2+4x^1-3x^0=0";
+	if (main2(ac, ag) == -1)
+		return (1);
+	ag[1] = "3x ^ 2+4x ^ 1-3x ^ 0=0";
+	if (main2(ac, ag) == -1)
+		return (1);
+	ag[1] = "3*x^2+4*x^1-3*x^0=0";
+	if (main2(ac, ag) == -1)
+		return (1);
+	ag[1] = "3 * x ^2+4 * x ^1-3 * x ^0=0";
+	if (main2(ac, ag) == -1)
+		return (1);
+	ag[1] = "3 * x ^ 2 + 4 * x ^ 1 - 3 * x ^ 0 = 0";
+	if (main2(ac, ag) == -1)
+		return (1);
+	ag[1] = "3 x^2+4 x^1-3 x^0 =0";
+	if (main2(ac, ag) == -1)
+		return (1);
+*/
 	return (0);
 }

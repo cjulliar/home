@@ -6,7 +6,7 @@
 /*   By: cjulliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 14:46:25 by cjulliar          #+#    #+#             */
-/*   Updated: 2018/11/27 16:56:22 by cjulliar         ###   ########.fr       */
+/*   Updated: 2018/11/28 10:25:05 by cjulliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,24 +60,26 @@ int		verif(char *s, int i)
 char	*test_space(char *str, int ts)
 {
 	int		i;
-//printf("test space:\n%s\n",str);
+printf("test space:\n%s\n",str);
 	i = 1;
 	if (str[ts] == 'X' && str[ts + 1] == '^' &&
-			str[ts + 2] == '0' && ft_isdigit(str[ts + 3]) == 0)
+			str[ts + 2] == '0' && ft_isnumeric(str[ts + 3]) == 0)
 	{
+		if (ts > 0 && ft_isnumeric(str[ts - 1]) == 1)
+			return(str);
 		printf("passe par test_space\n");
 		while (ts - i > 0 && str[ts - i] == ' ')
 			i++;
 		if (str[ts - i] == '*')
 			str[ts - i] = ' ';
-		if (ts == 0 || str[ts - 1] != '*' || ft_isnumeric(str[ts - 1]) == 0)
+		if (ts == 0 || str[ts - 1] != '*' || ft_isnumeric(str[ts - 1]) == 0) // plante sur "6 * x^0 = 6"
 			str[ts] = '1';
 		else
 			str[ts] = ' ';
 		str[ts + 1] = ' ';
 		str[ts + 2] = ' ';
 	}
-//printf("%s\n",str);
+printf("%s\n",str);
 	return (str);
 }
 
@@ -90,7 +92,7 @@ char	*ft_nospace(char *str) // test les espace retour a la ligne /t ect...
 	tr = 0;
 	while (str[ts] != '\0')
 	{
-		str = test_space(str, ts);
+	//	str = test_space(str, ts);
 		if (ft_isspace(str[ts]) == 0 && ft_isdigit(str[ts]) == 0
 			&& ft_ismath(str[ts]) == 0)
 			return ("\0");

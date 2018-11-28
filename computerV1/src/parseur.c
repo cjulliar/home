@@ -6,7 +6,7 @@
 /*   By: cjulliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 08:40:07 by cjulliar          #+#    #+#             */
-/*   Updated: 2018/11/27 17:02:58 by cjulliar         ###   ########.fr       */
+/*   Updated: 2018/11/28 09:24:49 by cjulliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int		xalone(char *str, int i, t_values *v) // normer si les if/else devient des 
 {
 	int		y;
 
- printf(" .c%d:%c",i,str[i]);
+// printf(" .c%d:%c",i,str[i]);
 	if (str[i] == '-')
 		i++;
 	y = i;
@@ -108,7 +108,7 @@ int		xalone(char *str, int i, t_values *v) // normer si les if/else devient des 
 			v->b += 1;
 		i++;
 	}
- printf(" - c%d:%c. ",i,str[i]);
+// printf(" - c%d:%c. ",i,str[i]);
 	return (i - 1);
 }
 
@@ -118,7 +118,7 @@ int		firstpart(char *str, int i, t_values *v)
 		return (-1);
 	while (str[i] != '\0')
 	{
- printf(" (%c) ",str[i]);
+// printf(" (%c) ",str[i]);
 		if (str[i] == '\0')
 			return (0);
 		if (str[i] == 'X' || (str[i] == '-' && str[i + 1] == 'X'))
