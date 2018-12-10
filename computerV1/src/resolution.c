@@ -6,7 +6,7 @@
 /*   By: cjulliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 11:42:11 by cjulliar          #+#    #+#             */
-/*   Updated: 2018/11/21 12:55:50 by cjulliar         ###   ########.fr       */
+/*   Updated: 2018/11/28 11:05:45 by cjulliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	resolution(t_values *v, t_values *r)
 {
-	double	a; // pk pas ca en t_values ??
+	double	a;
 	double	b;
 	double	c;
 

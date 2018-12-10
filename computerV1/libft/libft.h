@@ -6,7 +6,7 @@
 /*   By: cjulliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 16:43:35 by cjulliar          #+#    #+#             */
-/*   Updated: 2018/11/13 14:44:03 by cjulliar         ###   ########.fr       */
+/*   Updated: 2018/11/28 11:16:30 by cjulliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,5 @@ int				ft_abs(int i);
 int				ft_ismath(char c);
 char			*ft_upper(char *str);
 int				ft_isnumeric(char c);
-
 
 #endif

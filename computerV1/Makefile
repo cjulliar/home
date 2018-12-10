@@ -6,21 +6,19 @@
 #    By: cpalmier <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/18 15:03:03 by cpalmier          #+#    #+#              #
-#    Updated: 2018/11/28 09:25:00 by cjulliar         ###   ########.fr        #
+#    Updated: 2018/11/28 11:32:25 by cjulliar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = computer
 
 SRC = src/main.c src/parseur.c src/resolution.c src/ft_nospace.c \
-	  src/isolation.c src/reduced_forme.c src/reponse.c src/degre2.c
+	  src/isolation.c src/reduced_forme.c src/reponse.c src/degre2.c \
+	  src/parseur2.c
 
 HEADER = include/computer.h libft/libft.h
 
 OBJ = $(SRC:.c=.o)
-
-COLOR = \033[1;33m
-COLOR_OFF = \033[0m
 
 .PHONY : all clean fclean re
 

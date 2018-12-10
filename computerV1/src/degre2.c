@@ -6,7 +6,7 @@
 /*   By: cjulliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 16:50:29 by cjulliar          #+#    #+#             */
-/*   Updated: 2018/11/13 17:00:54 by cjulliar         ###   ########.fr       */
+/*   Updated: 2018/11/28 12:20:14 by cjulliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,10 @@ void	degre2pn(double a, double b, double d, char s)
 {
 	degre2pn2(b, d);
 	if (b != 0 || s == '-')
+	{
 		ft_putchar(s);
-	ft_putstr(" ");
+		ft_putstr(" ");
+	}
 	if (d < 0)
 		ft_putstr("i");
 	if (ft_isinteger(ft_sqrtdouble(ft_absdouble(d)), 2) == 0)

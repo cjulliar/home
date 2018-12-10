@@ -6,7 +6,7 @@
 /*   By: cjulliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 12:21:37 by cjulliar          #+#    #+#             */
-/*   Updated: 2018/11/13 16:54:17 by cjulliar         ###   ########.fr       */
+/*   Updated: 2018/11/28 12:19:46 by cjulliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,7 @@ int				isolation(char *str, int i, double n, t_values *v);
 void			reduced_forme(double a, double b, double c);
 void			reponse(double a, double b, double c, t_values *v);
 void			degre2(double a, double b, double c);
+int				xalone(char *str, int i, t_values *v);
+int				analyse(char *str, int i, t_values *v);
 
 #endif

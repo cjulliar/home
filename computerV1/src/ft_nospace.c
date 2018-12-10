@@ -6,12 +6,12 @@
 /*   By: cjulliar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 14:46:25 by cjulliar          #+#    #+#             */
-/*   Updated: 2018/11/28 10:25:05 by cjulliar         ###   ########.fr       */
+/*   Updated: 2018/11/28 11:36:34 by cjulliar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/computer.h"
-#include <stdio.h>
+
 char	*ft_attribution(char *rep, char *str, int ts, int tr)
 {
 	rep[tr] = '\0';
@@ -38,61 +38,35 @@ int		verif(char *s, int i)
 			i++;
 		else if ((s[i] == '=' && s[i - 1] == '=') ||
 				(s[i] == '/' || s[i] == '%'))
-		{printf("[%c] error 1 %d",s[i],i);return (0);}
+			return (0);
 		else if (s[i] == '*' && ((s[i - 1] < '0' || s[i - 1] > '9') ||
 			s[i + 1] != 'X'))
-		{printf("[%c] error 2 %d",s[i],i);return (0);}
+			return (0);
 		else if (s[i] == '^' && s[i - 1] == 'X')
 			i *= i;
 		else if (s[i] == 'X' && ft_isnumeric(s[i + 1]) == 1)
-		{printf("[%c] error 4 %d",s[i],i);return (0);}
+			return (0);
 		else if (s[i] == 'X' && (s[i - 1] == '*' ||
 					(s[i - 1] >= '0' && s[i - 1] <= '9')))
 			i++;
 		else if (ft_ismath(s[i]) == 1 && ft_ismath(s[i - 1]) == 1
 			&& (s[i - 1] != '=' && s[i] != '='))
-		{printf("[%c] error 5 %d",s[i],i);return (0);}
+			return (0);
 		i++;
 	}
 	return (1);
 }
 
-char	*test_space(char *str, int ts)
-{
-	int		i;
-printf("test space:\n%s\n",str);
-	i = 1;
-	if (str[ts] == 'X' && str[ts + 1] == '^' &&
-			str[ts + 2] == '0' && ft_isnumeric(str[ts + 3]) == 0)
-	{
-		if (ts > 0 && ft_isnumeric(str[ts - 1]) == 1)
-			return(str);
-		printf("passe par test_space\n");
-		while (ts - i > 0 && str[ts - i] == ' ')
-			i++;
-		if (str[ts - i] == '*')
-			str[ts - i] = ' ';
-		if (ts == 0 || str[ts - 1] != '*' || ft_isnumeric(str[ts - 1]) == 0) // plante sur "6 * x^0 = 6"
-			str[ts] = '1';
-		else
-			str[ts] = ' ';
-		str[ts + 1] = ' ';
-		str[ts + 2] = ' ';
-	}
-printf("%s\n",str);
-	return (str);
-}
-
-char	*ft_nospace(char *str) // test les espace retour a la ligne /t ect...
+char	*ft_nospace(char *str)
 {
 	char	*rep;
 	int		ts;
 	int		tr;
+
 	ts = 0;
 	tr = 0;
 	while (str[ts] != '\0')
 	{
-	//	str = test_space(str, ts);
 		if (ft_isspace(str[ts]) == 0 && ft_isdigit(str[ts]) == 0
 			&& ft_ismath(str[ts]) == 0)
 			return ("\0");
@@ -108,6 +82,5 @@ char	*ft_nospace(char *str) // test les espace retour a la ligne /t ect...
 		free(rep);
 		return ("\0");
 	}
-printf("reduct: %s\n\n",rep);
 	return (rep);
 }
