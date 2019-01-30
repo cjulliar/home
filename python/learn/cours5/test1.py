@@ -60,7 +60,7 @@ liste.insert(END, "Ciseau")
 liste.curselection()
 
 
-cadre = Frame(fenetre, width=768, height=576, borderwidth=1)
+cadre = Frame(fenetre, width=768, height=576, borderwidth=1, bg="red")
 cadre.pack(fill=BOTH)
 
 message = Label(cadre, text="Notre fenêtre")

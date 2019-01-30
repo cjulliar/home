@@ -1,0 +1,7 @@
+on a créer un éxécutable de notre test2.py.
+Pour ce faire on a installer cx_freeze avec la ligne suivante:
+	python -m pip install cx_Freeze --upgrade
+et ensuite nous avons simplement taper: 
+	cxfreeze test2.py
+ce qui a créer ce dossier dist avec l'executable test2.py que nous éxécutons avec la cmd:
+	./test2
