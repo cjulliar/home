@@ -31,9 +31,15 @@ fenetre = Tk()
 
 image = chargez_image('mon_image.png', resize=(600,600))
 
+size = 3
+
 
 
 x, y = image.size
+
+
+
+
 im1 = image.crop((0*x/3, 0*y/2, 1*x/3, 1*y/3))
 im2 = image.crop((1*x/3, 0*y/3, 2*x/3, 1*y/3))
 im3 = image.crop((2*x/3, 0*y/3, 3*x/3, 1*y/3))
@@ -68,24 +74,6 @@ p.append(p8)
 p.append(p9)
 
 #random.shuffle(p)
-
-"""
-ligne = 0
-i=0
-while ligne < 3:
-	var = "cadre" + str(ligne)
-	print(var)
-	var = Frame(fenetre, width=768, height=576, borderwidth=1)
-	var.pack(fill=BOTH)
-	while i < 3:
-		label = Label(var, image=p[i])
-		label.pack(side=LEFT)
-		i += 1
-	i+= 1
-	print(label)
-	print(var)
-	ligne += 1
-"""
 
 
 
@@ -129,18 +117,8 @@ label.pack(side=LEFT)
 label = Label(cadre3, image=p[7])
 label.pack(side=LEFT)
 
-#label = Label(cadre3, image=p[8])
-#abel.pack(side=LEFT)
 
-
-
-
-#photo = ImageTk.PhotoImage(image)
-#label = tk.Label(fenetre, image=photo)
-#label.pack()
-
-#decouper(image)
 
 fenetre.mainloop()
 
-fenetre.destroy() 
+#fenetre.destroy() 
