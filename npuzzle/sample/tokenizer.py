@@ -3,6 +3,6 @@ def npuzzle_lemmatizer(raw_text):
 	lines = raw_text.split("\n")
 	tokens = []
 	for line in lines:
-		line = line.split(" ")
+		line = line.split()
 		tokens.append(line)
 	return tokens
