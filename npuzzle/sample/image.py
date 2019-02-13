@@ -11,8 +11,7 @@ def swap(mylist, x, y):
     mylist[x] = swap2
     return mylist
 
-def npuzzle_image(fenetre, image, frame):
-
+def print_image(fenetre, image, frame):
 	x, y = image.size
 	size = frame.size
 	im = []
@@ -39,9 +38,11 @@ def npuzzle_image(fenetre, image, frame):
 		im_puzzle.append(im[post[x]])
 
 	i = 0
-	k = 0;
+	k = 0
 	while i < size:
-		cadre = Fcrame(fenetre, width=768, height=576, borderwidth=1)
+		#cadre = Fcrame(fenetre, width=768, height=576, borderwidth=1)
+		#la version 3.6 de l'ecole prefere Frame, la 3.7 accepte Fcrame
+		cadre = Frame(fenetre, width=768, height=576, borderwidth=1)
 		cadre.pack(fill=BOTH)
 		j = 0
 		while j < size:
@@ -50,5 +51,14 @@ def npuzzle_image(fenetre, image, frame):
 			j = j + 1
 			k = k + 1
 		i = i + 1
-	time.sleep(1)
+
 	fenetre.mainloop()
+	
+
+def npuzzle_image(solution):
+	for i, state in enumerate(solution.sequence[0:]):
+		print(state.frame)
+		fenetre, image = sample.npuzzle_windows()
+		print_image(fenetre, image, state.frame)
+
+		

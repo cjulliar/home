@@ -24,9 +24,10 @@ def main(puzzle, options):
 	tokens = sample.npuzzle_lemmatizer(raw_text)
 	tokens = sample.npuzzle_parser(tokens)
 	start_frame = sample.npuzzle_map(tokens)
-	if options['windows']:
-		fenetre, image = sample.npuzzle_windows(start_frame)
-		sample.npuzzle_image(fenetre, image, start_frame)
+	#affichage de l'image au depart
+	#if options['windows']:
+		#fenetre, image = sample.npuzzle_windows(start_frame)
+		#sample.npuzzle_image(fenetre, image, start_frame)
 	start_state, goal_state, solvable = sample.npuzzle_init_states(start_frame)
 	if solvable:
 		solution = sample.npuzzle_solver(start_state, goal_state, \
@@ -34,7 +35,10 @@ def main(puzzle, options):
 			sample.linear_conflict, options['strategy'])
 			#sample.manhattan_distance, options['strategy'])
 		if options['windows']:
-			solution.print_windows(fenetre, image)
+			
+			#solution.print_windows(fenetre, image)
+				
+			sample.npuzzle_image(solution)
 		else:
 			solution.print_out(verbose = options['verbose'])
 	else:

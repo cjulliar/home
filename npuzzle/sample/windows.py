@@ -1,11 +1,10 @@
 from tkinter import *
 from PIL import Image, ImageTk
-import random
-import sample
 
 
-def chargez_image(filename, resize=None):
-    image = Image.open('img/LenaSoderberg.jpg')
+
+def load_image(filename, resize=None):
+    image = Image.open(filename)
     if resize is not None:
         image = image.resize(resize, Image.ANTIALIAS)
     
@@ -14,12 +13,12 @@ def chargez_image(filename, resize=None):
 
 
 
-def npuzzle_windows(frame):
+def npuzzle_windows():
 
 #il faut surement ouvrir la fenetre hors de la fonction, pour juste modifier le puzzle
 	fenetre = Tk()
 	
-	image = chargez_image('mon_image.png', resize=(600,600))
+	image = load_image('img/LenaSoderberg.jpg', resize=(600,600))
 
 	
 	#fenetre.destroy() 
