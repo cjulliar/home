@@ -1,0 +1,55 @@
+Chapitre III
+
+Objectif
+
+L'objectif de ce projet est de vous présenter le concept de base de l'apprentissage automatique. Pour ce projet, vous devrez créer un programme qui prédit le prix d'une voiture en utilisant un train de fonctions linéaire avec un algorithme de descente de gradient.
+
+Nous travaillerons sur un exemple précis pour le projet, mais une fois que vous aurez terminé, vous pourrez utiliser l’algorithme avec n’importe quel autre jeu de données.
+
+
+Chapitre V
+
+Ce que tu as à faire
+
+Vous allez implémenter une régression linéaire simple avec une seule fonctionnalité - dans ce cas, le kilométrage de la voiture.
+Pour ce faire, vous devez créer deux programmes:
+
+• Le premier programme sera utilisé pour prédire le prix d’une voiture pour un kilométrage donné.
+Lorsque vous lancez le programme, il doit vous demander un kilométrage, puis vous restituer le prix estimé de ce kilométrage. Le programme utilisera l'hypothèse suivante pour prédire le prix:
+estimationPrice (kilométrage) = θ0 + (θ1 ∗ kilométrage)
+Avant le déroulement du programme d’entraînement, theta0 et theta1 seront mis à 0
+
+
+• Le deuxième programme sera utilisé pour former votre modèle. Il lira votre fichier de jeu de données et effectuera une régression linéaire sur les données.
+
+Une fois la régression linéaire terminée, vous enregistrerez les variables theta0 et theta1 pour les utiliser dans le premier programme.
+Vous utiliserez les formules suivantes:
+
+tmpθ0 = learningRate ∗ 1 / m 􏰀􏰀∑[X − 1 i = 0] (estimationPrice (kilométrage [i]) - prix [i])
+tmpθ1 = learningRate 1 / m ∑[X − 1 i = 0] (estimationPrice (kilométrage [i]) - prix [i]) ∗ kilométrage [i]
+
+Je vous laisse deviner ce que m est :)
+
+Notez que le prix estimé est le même que dans notre premier programme, mais ici, il utilise votre theta0 et theta1 temporaires et calculés.
+
+En outre, n’oubliez pas de mettre à jour simultanément theta0 et theta1.
+
+
+
+Chapitre VI
+Bonus
+Voici quelques bonus qui pourraient être très utiles:
+• Tracer les données dans un graphique pour voir leur répartition.
+• Tracez la ligne résultant de votre régression linéaire dans le même graphique, pour voir le résultat de votre dur labeur!
+• Un programme qui calcule la précision de votre algorithme.
+... et tous les autres bonus qui rendent votre programme plus impressionnant.
+
+
+
+
+
+
+
+
+
+
