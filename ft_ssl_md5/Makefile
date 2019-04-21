@@ -18,7 +18,7 @@ $(NAME) : $(OBJ)
 	make -C libft
 	@gcc -Wall -Werror -Wextra $(HEADER) $(SRC) libft/libft.a
 	@mv a.out $(NAME)
-	@echo "${COLOR}all : ft_ssl_md5 created √${COLOR_OFF}"
+	@echo "${COLOR}all : $(NAME) created √${COLOR_OFF}"
 
 ./%.o : src/%.c
 	@gcc -Wall -Werror -Wextra -c $< -o $@ -I $(HEADER) libft/libft.a
@@ -26,11 +26,11 @@ $(NAME) : $(OBJ)
 clean :
 	make -C libft clean
 	@rm -rf $(OBJ)
-	@echo "${COLOR}ft_ssl_md5 clean √${COLOR_OFF}"
+	@echo "${COLOR}$(NAME) clean √${COLOR_OFF}"
 
 fclean : clean
 	make -C libft fclean
 	@rm -rf $(NAME)
-	@echo "${COLOR}ft_ssl_md5 fclean √${COLOR_OFF}"
+	@echo "${COLOR}$(NAME) fclean √${COLOR_OFF}"
 
 re : fclean all

@@ -7,7 +7,11 @@
 
 typedef struct s_env
 {
-	int		i;
+	int		p;
+	int		q;
+	int		r;
+	int		s;
+
 }				t_env;
 
 #endif
