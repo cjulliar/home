@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cjulliar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/04/22 10:59:14 by cjulliar          #+#    #+#             */
+/*   Updated: 2019/04/22 10:59:18 by cjulliar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/ft_ssl.h"
 #include <fcntl.h>
 
@@ -48,7 +60,7 @@ int 	ft_flags(char **argv, int i, t_env *env)
 	return (1);
 }
 
-int		ft_parser(char **argv, int argc, t_env *env)
+int		ft_parser(int argc, char **argv, t_env *env)
 {
 	int i;
 
@@ -74,35 +86,56 @@ void	ft_init(t_env *env)
 
 }
 
+void	ft_md5(int argc, char **argv, t_env *env)
+{
+	if (ft_parser(argc, argv, env) == 0)
+	{
+		printf("error a mieux dev\n"); // pas fini !
+	}
+}
+
+void	ft_sha256(int argc, char **argv, t_env *env)
+{
+	if (ft_parser(argc, argv, env) == 0)
+	{
+		printf("error a mieux dev\n"); // pas fini !
+	}
+}
+
 int		main(int argc, char **argv)
 {
 	t_env	env;
-	char	*r;
+	char	*r = NULL;
 
 	if (argc < 2)
 	{	
 		write(1, "usage: ft_ssl command [command opts] [command args]\n", 52);
-		return (-1);
-	}
-
-	ft_init(&env);
-	if (ft_parser(argv, argc, &env) == 0)
-	{
-		printf("error a mieux dev\n"); // pas fini !
 		return (0);
 	}
-	if (env.p || env.q || env.r)
+	ft_init(&env);
+	if (ft_strcmp(ft_lower(argv[1]), "md5") == 0)
+		ft_md5(argc, argv, &env);
+	else if (ft_strcmp(ft_lower(argv[1]), "sha256") == 0)
+		ft_sha256(argc, argv, &env);
+	else
+	{
+		write(1, "ft_ssl: Error: '", 16);
+		ft_putstr(argv[1]);
+		write(1, "' is an invalid command.\n\nStandard commands:\n\n", 46);
+		write(1, "Message Digest commands:\nmd5\nsha256\n\nCipher commands:", 53);
+
+	}
+
+	
+	
+	if (env.p || env.q || env.r) // ou si y a rien 
 		ft_read(&r, 0);
 
+	//printf("%s\n", r);
 
-	// if (ft_strcmp(ft_lower(argv[1]), "md5") == 0 && argv[2] != NULL)
-	// 	ft_md5(argv[2], &env);
-	// else if (ft_strcmp(ft_lower(argv[1]), "sha256") == 0 && argv[2] != NULL)
-	// 	ft_sha256(argv[2], &env);
-	// else
-	// {
-	// 	write(1, "\n", 1); //error a gere ici
-	// }
+
+
+	
 
 	return (0);
 }
