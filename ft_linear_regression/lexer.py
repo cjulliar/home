@@ -15,13 +15,13 @@ def datas():
 			datas.append(tmp)
 	return datas
 
-def tetas():
-	tetaO = open("teta", "r")
-	tetaR = tetaO.read()
-	lines = tetaR.split("\n")
-	tetas = []
+def thetas():
+	thetaO = open("theta", "r")
+	thetaR = thetaO.read()
+	lines = thetaR.split("\n")
+	thetas = []
 	tmp_line = []
 	for line in lines[0:]:
 		if line:
-			tetas.append(float(line))
-	return tetas
+			thetas.append(float(line))
+	return thetas

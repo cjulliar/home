@@ -12,10 +12,10 @@ def visualisation():
 		plt.plot(data[0], data[1], 'ro')
 
 	
-	teta = lexer.tetas()
-	if teta[0] != 0 and teta[1] != 0:
+	theta = lexer.thetas()
+	if theta[0] != 0 and theta[1] != 0:
 		x = np.linspace(0,240000,100000)
-		y = teta[0] * x + teta[1]
+		y = theta[0] * x + theta[1]
 		plt.plot(x, y, '-r')
 
 	plt.grid()
