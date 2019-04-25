@@ -139,12 +139,13 @@ def gradientDusale():
 	Ym /= n
 
 	tmpJ = 0
-	tmpdt0 = 0
-	tmpdt1 = 0
-	alpha = 1 #vitesse de convergence
+	
+	alpha = 0.1e-10 #vitesse de convergence
 	dt0 = 10
 	dt1 = 10
 	while abs(dt0) > 1 and abs(dt1) > 1:
+		tmpdt0 = 0
+		tmpdt1 = 0
 		for i in range(n):
 	#		tmpJ += (Y[i] - (t0 + t1 * X[i])) * (Y[i] - (t0 + t1 * X[i]))
 			hxi = t0 + t1 * X[i]
