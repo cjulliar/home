@@ -1,208 +1,79 @@
 #!/usr/bin/env python3
 
 import lexer
-import sys
+import math
+import matplotlib.pyplot as plt
+import numpy as np
+import time
+from matplotlib import animation
 
-def gradientWIKI():
+def visualisation(vt0, vt1):
+	fig = plt.figure()
+	ax = plt.axes(xlim=(0, 250000), ylim=(3000, 9000))
+	line, = ax.plot([], [], lw=2)
 	datas = lexer.datas()
-	t1 = 0
-	t0 = 0
+	plt.xlabel("mileage (km)")
+	plt.ylabel("price (€)")
+	ttl = ax.text(0.32, 1.05, '', transform = ax.transAxes, va='center')
+	for data in datas:
+		plt.plot(data[0], data[1], 'ro')
+	def init():
+	    ttl.set_text('')
+	    line.set_data([], [])
+	    return line, ttl
 
-	mx = 0
-	my = 0
+	def animate(i):
+	    ttl.set_text("number of iterations: " + str(i))
+	    t0 = vt0[i]
+	    t1 = vt1[i]
+	    x = np.linspace(0,240000,100000)
+	    y = t1 * x + t0
+	    line.set_data(x, y)
+	    return line, ttl
+	anim = animation.FuncAnimation(fig, animate, init_func=init,
+	                               frames=len(vt0), interval=20, blit=False)
+	plt.show()
 
-	t1 = 1
-	s = 0
-	vi = 0
-	for i, line in enumerate(datas):
-		n = i + 1
-		xi = line[0]
-		yi = line[1]
-		mx = mx + xi
-		my = my + yi
+def ft_write(t0, t1):
+	f = open("theta", "w")
+	f.write(str(t1))
+	f.write("\n")
+	f.write(str(t0))
+	f.close()
+	f = open("theta", "r")
 
-	mx = mx / n
-	my = my / n 
-
-	tmp0 = 0
-	tmp1 = 0
-	t1i = 1
-	for i, line in enumerate(datas):
-		n = i + 1
-		xi = line[0]
-		yi = line[1]
-
-		covi = (xi - mx) * (yi - my)
-		vi = (xi - mx) * (xi - mx)
-
-		t0i = my - t1i * mx
-		if vi != 0:
-			t1i = covi / vi 
-		tmp0 = tmp0 + t0i
-		tmp1 = tmp1 + t1i
-		t0 = tmp0 / n
-		t1 = tmp1 / n
-
-		s = ((yi - t1 * xi - t0) * (yi - t1 * xi - t0))
-		print("y = ", t1 ,"x + ", t0)
-		print("s: ", s, "\n")
-
-def gradientSUJET():
-	datas = lexer.datas()
-
-	t0 = 0 #teta[0]
-	t1 = 0 #teta[1]
-	teta = lexer.tetas() 
-
-	tmpT0 = 0
-	tmpT1 = 0
-	for i, line in enumerate(datas):
-		m = i
-
-	for i, line in enumerate(datas):
-		n = i + 1
-		price_i = line[0]
-		mileage_i = line[1]
-		
-
-		tmpL0 = tmpT0 + (float(mileage_i) * t0 + t1 - price_i)
-		tmpT0 = tmpL0 / m
-
-		tmpL1 = tmpT1 + (float(mileage_i) * t0 + t1 - price_i) * mileage_i
-		tmpT1 = tmpL1 / m
-
-		print(tmpL0)
-		print(tmpL1, "\n")
-
-def gradientCoursea():
-	datas = lexer.datas()
-
-	teta = lexer.tetas() 
-	t0 = 0 #teta[0]
-	t1 = 0 #teta[1]
-
-	alpha = 1
-
-	for i, line in enumerate(datas):
-		m = i
-
-	sum0 = 0
-	sum1 = 0
-	for i, line in enumerate(datas):
-		n = i + 1
-		price_i = line[0]
-		mileage_i = line[1]
-
-		if i > 0:
-			sum0 = sum0 + (t0 + t1 * mileage_i) - price_i
-			tmp0 = t0 - alpha * (1 / n) * sum0
-			sum1 = sum1 + (t0 + t1 * mileage_i) - price_i #identique a sum0
-			tmp1 = t1 - alpha * (1 / n) * sum1 * mileage_i
-			t0 = tmp0
-			t1 = tmp1
-		print(t0, t1, "\n")
-		
-def gradient ():
-	datas = lexer.datas()
-
-	teta = lexer.tetas() 
-	t0 = 0 #teta[0]
-	t1 = 0 #teta[1]
-
-
-	for i, line in enumerate(datas):
-		n = i + 1
-		price_i = line[0]
-		mileage_i = line[1]
-
-def gradientDusale():
-	datas = lexer.datas()
-	theta = lexer.thetas()
-
-	t0 = 0#theta[0]
-	t1 = 0#theta[1]
-
-	X = []
-	Y = []
-	Xm = 0
-	Ym = 0
-
-	J = 0 # fonction ecart avec y = t0 + t1 * x
-
-	for i, line in enumerate(datas):
-		n = i + 1
-		X.append(line[0])
-		Y.append(line[1])
-		Xm += line[0]
-		Ym += line[1]
-	Xm /= n
-	Ym /= n
-
-	tmpJ = 0
-	
-	alpha = 0.1e-10 #vitesse de convergence
-	dt0 = 10
-	dt1 = 10
-	while abs(dt0) > 1 and abs(dt1) > 1:
-		tmpdt0 = 0
-		tmpdt1 = 0
-		for i in range(n):
-	#		tmpJ += (Y[i] - (t0 + t1 * X[i])) * (Y[i] - (t0 + t1 * X[i]))
-			hxi = t0 + t1 * X[i]
-			tmpdt0 += (hxi - Y[i])
-			tmpdt1 += (hxi - Y[i]) * X[i]
-
-	#	J = tmpJ / (2 * n)
-		dt0 = tmpdt0 / n
-		dt1 = tmpdt1 / n
-
-
-		t0 = t0 - alpha * dt0
-		t1 = t1 - alpha * dt1
-
-		print(dt0, dt1)
-		print(t0, t1)
-		print("\n")
-
-
-
-#	print(t0, t1)
-
-
+def update_thetas(datas, theta0, theta1):
+    n = len(datas)
+    S = 0
+    F = 0
+    for i, line in enumerate(datas):
+        epsiloni = theta0 + theta1 * line[0] - line[1]
+        S = S + epsiloni
+        F = F + (epsiloni * line[0])
+    dtheta0 = S / n
+    dtheta1 = F / n
+    return [dtheta0, dtheta1]
+    
+def minimisation(alpha0, alpha1, error):
+    datas = lexer.datas()
+    theta = lexer.thetas()
+    dt0, dt1 = 10, 10
+    t0, t1 = theta[0], theta[1]
+    vt0 = []
+    vt1 = []
+    while abs(dt0) > 0.01 and abs(dt1) > 0.01:
+        DT = update_thetas(datas, t0, t1)
+        dt0, dt1 = DT[0], DT[1]
+        t0 = t0 - alpha0*dt0
+        t1 = t1 - alpha1*dt1
+        if math.isnan(t0) or math.isnan(t1):
+        	if error:
+        		exit()
+        	minimisation(alpha1, alpha0, 1)
+        vt0.append(t0)
+        vt1.append(t1)
+    ft_write(t0, t1)
+    visualisation(vt0, vt1)
 
 if __name__ == '__main__':
-    gradientDusale()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    minimisation(1, 1/10**11, 0)

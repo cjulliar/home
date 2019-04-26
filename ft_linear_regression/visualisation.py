@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-#python3 -mpip install matplotlib
 
 import lexer
 import matplotlib.pyplot as plt
