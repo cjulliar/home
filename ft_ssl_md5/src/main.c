@@ -12,7 +12,7 @@
 
 #include "../include/ft_ssl.h"
 #include <fcntl.h>
-
+#include <stdlib.h>
 void	ft_read(char **rep, int fd)
 {
 	char	c[2];
@@ -35,27 +35,31 @@ void	ft_read(char **rep, int fd)
 	rep[0] = str;
 }
 
-int 	ft_flags(char **argv, int i, t_env *env)
+int 	ft_flags(int argc, char **argv, int *i, t_env *env)
 {
-	if (argv[i][1] == 'p')
+	if (argv[*i][1] == 'p')
 	{
-		env->p += 1;
+		env->parser[0] = '1';
 	}
-	else if (argv[i][1] == 'q')
+	else if (argv[*i][1] == 'q')
 	{
-		env->q += 1;
+		env->parser[1] = '1';
 	}
-	else if (argv[i][1] == 'r')
+	else if (argv[*i][1] == 'r')
 	{
-		env->r += 1;
+		env->parser[2] = '1';
 	}
-	else if (argv[i][1] == 's')
+	else if (argv[*i][1] == 's')
 	{
-		env->s += 1;
-	}
-	else if (argv[i - 1][1] != 's')
-	{
-		return (0);
+		*i += 1;
+		if (*i + 1 > argc)
+		{
+			env->parser[3] = '1';
+			env->strS = argv[*i + 1];
+			printf("%s\n", env->strS);
+		}
+		else
+			return (0);
 	}
 	return (1);
 }
@@ -69,7 +73,7 @@ int		ft_parser(int argc, char **argv, t_env *env)
 	{
 		if (argv[i][0] == '-')
 		{
-			if (ft_flags(argv, i, env) == 0)
+			if (ft_flags(argc, argv, &i, env) == 0)
 				return (0);
 		}
 		i++;
@@ -79,10 +83,15 @@ int		ft_parser(int argc, char **argv, t_env *env)
 
 void	ft_init(t_env *env)
 {
-	env->p = 0;
-	env->q = 0;
-	env->r = 0;
-	env->s = 0;
+	int 	i;
+
+	env->parser = (char*)malloc(sizeof(char)*6);
+	i = 0;
+	while (i < 4)
+	{
+		env->parser[i] = '0';
+		i += 1;
+	}
 
 }
 
@@ -125,10 +134,10 @@ int		main(int argc, char **argv)
 		write(1, "Message Digest commands:\nmd5\nsha256\n\nCipher commands:", 53);
 
 	}
+	printf("parser: %s\n", env.parser);
 
-	
-	
-	if (env.p || env.q || env.r) // ou si y a rien 
+	char onlyS[4] = "0001";
+	if (env.parser != onlyS)
 		ft_read(&r, 0);
 
 	//printf("%s\n", r);
