@@ -7,9 +7,10 @@
 
 typedef struct s_env
 {
-	char	*parser;
-	char	*strS;
-	char	*strE;
+	int		p;
+	int		q;
+	int		r;
+	int		s;
 
 }				t_env;
 
