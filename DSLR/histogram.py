@@ -4,7 +4,22 @@ import lexer
 import matplotlib.pyplot as plt
 import numpy as np
 import sys
-import describe
+
+def min_features(datas):
+	min_f = [''] * 13
+	for line in datas[1:]:
+		for i, feature in enumerate(line[6:]):
+			if feature and (not min_f[i] or float(feature) < min_f[i]):
+				min_f[i] = round(float(feature),2)
+	return min_f
+
+def max_features(datas):
+	max_f = [''] * 13
+	for line in datas[1:]:
+		for i, feature in enumerate(line[6:]):
+			if feature and (not max_f[i] or float(feature) > max_f[i]):
+				max_f[i] = round(float(feature),2)
+	return max_f
 
 def feature_house(datas, num_feature):
 	feat_house = []
@@ -24,19 +39,22 @@ def feature_house(datas, num_feature):
 				feat_hufflepuff.append(feature)
 	feat_house.append(feat_ravenclaw)
 	feat_house.append(feat_slytherin)
-	feat_house.append(feat_gryffindor)
-	feat_house.append(feat_hufflepuff)
+	#feat_house.append(feat_gryffindor)
+	#feat_house.append(feat_hufflepuff)
 	return feat_house
 
-def display(fh, name):
-    plt.hist(fh[0], histtype = 'stepfilled', color = 'green', alpha = 0.25, label = 'Gryff')
-    plt.hist(fh[1], histtype = 'stepfilled', color = 'blue', alpha = 0.25, label = 'Slith')
-    plt.hist(fh[2], histtype = 'stepfilled', color = 'red', alpha = 0.25, label = 'Huffle')
-    plt.hist(fh[3], histtype = 'stepfilled', color = 'yellow', alpha = 0.25, label = 'Ravenc')
-    plt.xlabel('Mark')
-    plt.ylabel('Students')
-    plt.title('Histogram of '+ name)
-    plt.show()
+def display(fh, name, min_f, max_f):
+	bins = [x + 0.5 for x in range(int(min_f), int(max_f))]
+	plt.hist(fh[0], bins = bins, color = 'green', alpha = 0.25, label = 'Gryff')
+	plt.hist(fh[1], bins = bins, color = 'blue', alpha = 0.25, label = 'Slith')
+	#plt.hist(fh[2], histtype = 'stepfilled', color = 'red', alpha = 0.25, label = 'Huffle')
+	#plt.hist(fh[3], histtype = 'stepfilled', color = 'yellow', alpha = 0.25, label = 'Ravenc')
+	plt.xlabel('Mark')
+	plt.ylabel('Students')
+	plt.title('Histogram of '+ name)
+	#plt.axis([-180, 280, 0, 100])
+
+	plt.show()
 
 def histogram(argv):
 	try :
@@ -44,8 +62,12 @@ def histogram(argv):
 	except :
 		print ("Failed to read the file.")
 		exit();
-	#feat_house = feature_house(datas, 18)
-	#display (feat_house, datas[0][18])
+	min_f = min_features(datas)
+	max_f = max_features(datas)
+	print (min_f[12])
+	print (max_f[12])
+	feat_house = feature_house(datas, 18)
+	display (feat_house, datas[0][18], min_f[12], max_f[12])
 
 
 #	i = 6
@@ -91,35 +113,33 @@ def histogram(argv):
 
 
 
-	x1 = np.linspace(0.0, 5.0)
-	y1 = np.cos(2 * np.pi * x1) * np.exp(-x1)
+	# x1 = np.linspace(0.0, 5.0)
+	# y1 = np.cos(2 * np.pi * x1) * np.exp(-x1)
 	
-	x2 = np.linspace(0.0, 2.0)
-	y2 = np.cos(2 * np.pi * x2)	
+	# x2 = np.linspace(0.0, 2.0)
+	# y2 = np.cos(2 * np.pi * x2)	
 	
-	x3 = np.linspace(0.0, 4.0)
-	y3 = np.cos(2 * np.pi * x3)	
+	# x3 = np.linspace(0.0, 4.0)
+	# y3 = np.cos(2 * np.pi * x3)	
 	
-	x4 = np.linspace(-2.0, 2.0)
-	y4 = np.cos(2 * np.pi * x4)	
+	# x4 = np.linspace(-2.0, 2.0)
+	# y4 = np.cos(2 * np.pi * x4)	
 	
-	x5 = np.linspace(-10.0, 20.0)
-	y5 = np.cos(2 * np.pi * x5)
+	# x5 = np.linspace(-10.0, 20.0)
+	# y5 = np.cos(2 * np.pi * x5)
 
-	i = 6
-	while i < 14:
-		#p = i - 5
-		fh = feature_house(datas, i)
-		plt.subplot(8, 4, i)
+	# i = 6
+	# while i < 7:
+	# 	#p = i - 5
+	# 	fh = feature_house(datas, i)
+	# 	plt.subplot(8, 4, i)
 
-		plt.hist(fh[0], histtype = 'stepfilled', color = 'green', alpha = 0.25, label = 'Gryff')
-		plt.hist(fh[1], histtype = 'stepfilled', color = 'blue', alpha = 0.25, label = 'Slith')
-		plt.hist(fh[2], histtype = 'stepfilled', color = 'red', alpha = 0.25, label = 'Huffle')
-		plt.hist(fh[3], histtype = 'stepfilled', color = 'yellow', alpha = 0.25, label = 'Ravenc')
+	# 	plt.hist(fh[0], histtype = 'stepfilled', color = 'green', alpha = 0.25, label = 'Gryff')
+	# 	plt.hist(fh[1], histtype = 'stepfilled', color = 'blue', alpha = 0.25, label = 'Slith')
 		
-		#plt.legend(prop={'size': 10})
-		plt.title('Histogram of '+ datas[0][i])
-		i += 1
+	# 	#plt.legend(prop={'size': 10})
+	# 	plt.title('Histogram of '+ datas[0][i])
+	# 	i += 1
 	
 
 	# plt.subplot(432)

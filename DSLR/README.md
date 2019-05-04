@@ -1,0 +1,1 @@
+Alors que le Basilic aveugle foncait vers lui, Harry vit un reflet à l'intérieur du chapeau, il y plongeat déséspérément la main et en sorti un fichier csv. Cela ne suffirait pas pour le sortir de la. Le basilic enfonca sont croc dans la gorge de Harry qui mourrut sur le coup. Fin.
