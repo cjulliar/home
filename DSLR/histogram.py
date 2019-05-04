@@ -4,6 +4,8 @@ import lexer
 import matplotlib.pyplot as plt
 import numpy as np
 import sys
+#import seaborn as sns
+# python3.4 -m pip install --user seaborn
 
 def min_features(datas):
 	min_f = [''] * 13
@@ -39,16 +41,16 @@ def feature_house(datas, num_feature):
 				feat_hufflepuff.append(feature)
 	feat_house.append(feat_ravenclaw)
 	feat_house.append(feat_slytherin)
-	#feat_house.append(feat_gryffindor)
-	#feat_house.append(feat_hufflepuff)
+	feat_house.append(feat_gryffindor)
+	feat_house.append(feat_hufflepuff)
 	return feat_house
 
-def display(fh, name, min_f, max_f):
+def display(fh, name):
 	bins = [x + 0.5 for x in range(int(min_f), int(max_f))]
-	plt.hist(fh[0], bins = bins, color = 'green', alpha = 0.25, label = 'Gryff')
-	plt.hist(fh[1], bins = bins, color = 'blue', alpha = 0.25, label = 'Slith')
-	#plt.hist(fh[2], histtype = 'stepfilled', color = 'red', alpha = 0.25, label = 'Huffle')
-	#plt.hist(fh[3], histtype = 'stepfilled', color = 'yellow', alpha = 0.25, label = 'Ravenc')
+	plt.hist(fh[0], histtype = 'stepfilled', color = 'green', alpha = 0.25, label = 'Gryff')
+	plt.hist(fh[1], histtype = 'stepfilled', color = 'blue', alpha = 0.25, label = 'Slith')
+	plt.hist(fh[2], histtype = 'stepfilled', color = 'red', alpha = 0.25, label = 'Huffle')
+	plt.hist(fh[3], histtype = 'stepfilled', color = 'yellow', alpha = 0.25, label = 'Ravenc')
 	plt.xlabel('Mark')
 	plt.ylabel('Students')
 	plt.title('Histogram of '+ name)
@@ -62,12 +64,36 @@ def histogram(argv):
 	except :
 		print ("Failed to read the file.")
 		exit();
-	min_f = min_features(datas)
-	max_f = max_features(datas)
-	print (min_f[12])
-	print (max_f[12])
-	feat_house = feature_house(datas, 18)
-	display (feat_house, datas[0][18], min_f[12], max_f[12])
+#	min_f = min_features(datas)
+#	max_f = max_features(datas)
+#	print (min_f[11])
+#	print (max_f[11])
+	f_h = feature_house(datas, 17)
+#	display (feat_house, datas[0][17], min_f[11], max_f[11])
+
+
+
+	print(plt.style.available[:6])
+
+	# Notez la taille de la figure
+	fig = plt.figure(figsize=(12,8))
+	for i in range(6):
+		# On peut ajouter des sous graphes ainsi
+		fig.add_subplot(3,2,i+1)
+#		display(f_h,datas[0][17])
+		plt.style.use(plt.style.available[i])
+		plt.plot(x, y)
+		# Pour ajouter du texte
+		plt.text(s=plt.style.available[i], x=5, y=2, color='red')
+
+
+		
+
+
+
+
+
+
 
 
 #	i = 6
