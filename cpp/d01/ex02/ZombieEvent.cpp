@@ -20,7 +20,6 @@ void			ZombieEvent::setZombieType(std::string type)
 
 std::string		ZombieEvent::randomChump(void)
 {
-	srand (time(NULL));
 	int 			size = std::rand() % 5 + 3;
 	std::string		name;
 	int				letter;
