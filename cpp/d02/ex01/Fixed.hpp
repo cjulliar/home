@@ -7,8 +7,8 @@ class Fixed
 {
 	public:
 		Fixed(void);
-		Fixed(int const point);
-		Fixed(float const point);
+		Fixed(int const enter);
+		Fixed(float const enter);
 		Fixed(Fixed const & src);
 		~Fixed(void);
 
