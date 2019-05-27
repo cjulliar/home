@@ -1,14 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cjulliar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/27 15:51:47 by cjulliar          #+#    #+#             */
+/*   Updated: 2019/05/27 15:51:48 by cjulliar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Bureaucrat.hpp"
 
 int main()
 {
 	try
 	{
-		Bureaucrat Borgin1("Jean", 73);
+		Bureaucrat Boring1("Jean", 50);
+		std::cout << Boring1 << std::endl;
+		Boring1.decrementGrade();
+		std::cout << Boring1 << std::endl;
 	}
 	catch(std::exception &e)
 	{
-		
+		std::cout << e.what() << std::endl;
 	}
 	return 0;
 }
