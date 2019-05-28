@@ -19,6 +19,8 @@ class Form
 		int			getGradeToExecute(void) const;
 		void		beSigned(Bureaucrat bureaucrat);
 
+		void		execute(Bureaucrat const &executor) const;
+
 		class GradeTooHighException: public std::exception
 		{
 			public:
@@ -35,8 +37,16 @@ class Form
 					return ("Error. this bureaucrat has grade too low");
 				}
 		};
+		class NoSignException: public std::exception
+		{
+			public:
+				virtual const char* what() const throw()
+				{
+					return ("Error. this form is not signed");
+				}
+		};
 
-	private:
+	protected:
 		std::string	const	_name;
 		bool				_isSigned;
 		int	const			_gradeToSign;

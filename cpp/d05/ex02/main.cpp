@@ -12,26 +12,24 @@
 
 #include "Bureaucrat.hpp"
 #include "Form.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 int main()
 {
 	try
 	{
 		Bureaucrat Boring1("Jean", 14);
-		Form paper1("form A.112", 13, 12);
-		Form paper2("form B.411", 12, 11);
+		Form paper1("form B.411", 15, 11);
+		ShrubberyCreationForm paper2("form2");
+		RobotomyRequestForm paper3("form3");
+		PresidentialPardonForm paper4("form4");
 
-		// paper1.beSigned(Boring1);
-		std::cout << Boring1 << std::endl;
-		std::cout << paper1 << std::endl;
-		Boring1.incrementGrade();
-		paper1.beSigned(Boring1);
-		std::cout << Boring1 << std::endl;
-		std::cout << paper1 << std::endl;
+		paper2.action();
+		paper3.action();
+		paper4.action();
 
-		Boring1.signForm(paper2);
-		Boring1.incrementGrade();
-		Boring1.signForm(paper2);
 
 	}
 	catch(std::exception &e)
